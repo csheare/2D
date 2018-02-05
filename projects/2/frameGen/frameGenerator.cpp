@@ -24,7 +24,7 @@ FrameGenerator(SDL_Renderer* rend, SDL_Window*  win, int w, int h,
 
 void FrameGenerator::makeFrame() {
   SDL_Surface* screenCap = SDL_CreateRGBSurface(0, WIDTH, HEIGHT, 32,
-    0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+    0, 0, 0, 0);
   if ( screenCap ) {
     SDL_RenderReadPixels(renderer, NULL,
       SDL_GetWindowPixelFormat(window),
