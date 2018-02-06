@@ -51,18 +51,39 @@ void Draw::drawHexagon(SDL_Point tip,int width,int height,SDL_Color color){
 
 void Draw::drawPurine(SDL_Point tip,int width,int height,SDL_Color color){
       drawHexagon(tip,width,height,color);
+      SDL_Point p1 ={(int)(tip.x+(width/2)-2),(int)(tip.y+height)};
+      SDL_Point p2 ={(int)(tip.x+(width))-10,(int)(tip.y+1.25*height)+10};
+      SDL_Point p3 ={(int)(tip.x+(width/2)-2)+10,(int)(tip.y+1.75*height)+10};
+      SDL_Point p4 ={(int)(tip.x)-5,(int)(tip.y+1.75*height)+10};
+      SDL_Point p5 ={(int)tip.x,(int)(tip.y+height)};
       SDL_SetRenderDrawColor(renderer, color.r,color.g,color.b,color.a);
-      SDL_RenderDrawLine(renderer,tip.x+(width/2)-2,tip.y+height,tip.x+(width),tip.y+1.25*height);
-      SDL_RenderDrawLine(renderer,tip.x+(width/2)-2,tip.y+height,tip.x+(width),tip.y+1.25*height);
+      SDL_RenderDrawLine(renderer,p1.x,p1.y,p2.x,p2.y);
+      SDL_RenderDrawLine(renderer,p2.x,p2.y,p3.x,p3.y);
+      SDL_RenderDrawLine(renderer,p3.x,p3.y,p4.x,p4.y);
+      SDL_RenderDrawLine(renderer,p4.x,p4.y,p5.x,p5.y);
 }
 
 void Draw::drawPyrimidine(SDL_Point center,int width,int height,SDL_Color color){
     drawHexagon(center,width,height,color);
 }
 
+void Draw::drawCytosine(SDL_Point tip,int width,int height,SDL_Color color){
+  drawPurine(tip,width,height,color);
+}
+void Draw::drawThymine(SDL_Point tip,int width,int height,SDL_Color color){
+  drawPurine(tip,width,height,color);
+}
+void Draw::drawGuanine(SDL_Point tip,int width,int height,SDL_Color color){
+  drawPyrimidine(tip,width,height,color);
+}
+void Draw::drawAdenine(SDL_Point tip,int width,int height,SDL_Color color){
+  drawPyrimidine(tip,width,height,color);
+}
 
-void Draw::drawDNA(SDL_Point center, int radius,float startAngle, float endAngle, SDL_Color color){//angles in in radians
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+
+
+void Draw::drawDNA(SDL_Point center, int radius,float startAngle, float endAngle, SDL_Color bcolor,SDL_Color cyt,SDL_Color ad,SDL_Color thy,SDL_Color guan){//angles in in radians
+    SDL_SetRenderDrawColor(renderer, bcolor.r, bcolor.g, bcolor.b, bcolor.a);
 
     startAngle = startAngle * PI /180;//convert to radians
     endAngle = endAngle* PI /180;//convert to radians
@@ -90,7 +111,7 @@ void Draw::drawDNA(SDL_Point center, int radius,float startAngle, float endAngle
         int dy1 = scalarProp * radius * sin(theta) - yi;
         //std::cout <<"1) X is: "<< dx << ", Y is: " << dy<< std::endl;
 
-        SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);//red
+        SDL_SetRenderDrawColor(renderer, bcolor.r, bcolor.g, bcolor.b, bcolor.a);//red
         SDL_RenderDrawPoint(renderer, center.x + dx1 +radius, center.y - dy1 +radius);
         SDL_RenderDrawPoint(renderer, center.x - dx1 +radius, center.y + dy1 + radius);
 
@@ -115,19 +136,19 @@ void Draw::drawDNA(SDL_Point center, int radius,float startAngle, float endAngle
 
 
           //Adenine
-          SDL_SetRenderDrawColor(renderer, 255, 0, 0, color.a);
+          SDL_SetRenderDrawColor(renderer, ad.r, ad.g, ad.b, ad.a);
           SDL_RenderDrawLine(renderer,x1,y1,(x1+x2)/2,(y1+y2)/2);
 
-          //Guanine
-          SDL_SetRenderDrawColor(renderer, 0, 255, 0, color.a);
+          //Thymine
+          SDL_SetRenderDrawColor(renderer, thy.r, thy.g, thy.b, thy.a);
           SDL_RenderDrawLine(renderer,(x1+x2)/2,(y1+y2)/2,x2,y2);
 
           //Cytosine
-          SDL_SetRenderDrawColor(renderer, 0, 0, 255, color.a);
+          SDL_SetRenderDrawColor(renderer, cyt.r, cyt.g, cyt.b, cyt.a);
           SDL_RenderDrawLine(renderer,x3,y3,(x3+x4)/2,(y3+y4)/2);
 
           //Guanine
-          SDL_SetRenderDrawColor(renderer, 255, 0, 255, color.a);
+          SDL_SetRenderDrawColor(renderer, guan.r, guan.g, guan.b, guan.a);
           SDL_RenderDrawLine(renderer,(x3+x4)/2,(y3+y4)/2,x4,y4);
 
           count = 0;
