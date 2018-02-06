@@ -30,20 +30,36 @@ void Draw::drawRect(SDL_Point center, int width, int height, SDL_Color color){
   rect->y = center.y;
   rect->w = width;
   rect->h = height;
-  SDL_RenderFillRect(renderer,rect);
+  SDL_RenderDrawRect(renderer,rect);
   //do i need to free rect?
 }
-void Draw::drawPentagon(SDL_Point tip,int width,int height,SDL_Color color){
+void Draw::drawHexagon(SDL_Point tip,int width,int height,SDL_Color color){
       drawRect(tip,width/2,height,color);
-      
+
+      SDL_SetRenderDrawColor(renderer,255,255,255,0);
+      SDL_RenderDrawLine(renderer,tip.x+(width/2)-1,tip.y-1, tip.x+(width/2)-1,tip.y+height-1);
+      SDL_RenderDrawLine(renderer,tip.x,tip.y, tip.x,tip.y+height);
+
+      //right triangle
+      SDL_SetRenderDrawColor(renderer, color.r,color.g,color.b,color.a);
+      SDL_RenderDrawLine(renderer,tip.x+(width/2)-2,tip.y, tip.x+(width),tip.y+(height/2));
+      SDL_RenderDrawLine(renderer,tip.x+(width),tip.y+(height/2),tip.x+(width/2)-2,tip.y+height);
+      //left triangle
+      SDL_RenderDrawLine(renderer,tip.x,tip.y, tip.x-(width/2),tip.y+(height/2));
+      SDL_RenderDrawLine(renderer,tip.x-(width/2),tip.y+(height/2),tip.x,tip.y+height);
 }
 
-void drawHexagon(SDL_Point tip,SDL_Color color){
-
+void Draw::drawPurine(SDL_Point tip,int width,int height,SDL_Color color){
+      drawHexagon(tip,width,height,color);
+      SDL_SetRenderDrawColor(renderer, color.r,color.g,color.b,color.a);
+      SDL_RenderDrawLine(renderer,tip.x+(width/2)-2,tip.y+height,tip.x+(width),tip.y+1.25*height);
+      SDL_RenderDrawLine(renderer,tip.x+(width/2)-2,tip.y+height,tip.x+(width),tip.y+1.25*height);
 }
-void drawTriangle(SDL_Point center,SDL_Color color){
 
+void Draw::drawPyrimidine(SDL_Point center,int width,int height,SDL_Color color){
+    drawHexagon(center,width,height,color);
 }
+
 
 void Draw::drawDNA(SDL_Point center, int radius,float startAngle, float endAngle, SDL_Color color){//angles in in radians
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);

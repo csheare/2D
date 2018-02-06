@@ -23,10 +23,10 @@ int main(void) {
   SDL_Color color = {255,0,0,0};
   SDL_Color color2 = {0,0,255,0};
   Draw d(renderer);
-  // d.drawDNA(center,100,0,90, color);
-  // d.drawDNA(center2,100,0,90, color2);
-  // d.drawDNA(center3,100,0,90, color);
-  d.drawPentagon(center2,50,50,color);
+  d.drawDNA(center,100,0,90, color);
+  d.drawDNA(center2,100,0,90, color2);
+  d.drawDNA(center3,100,0,90, color);
+  //d.drawPurine(center2,50,50,color);
 
 
   SDL_RenderPresent(renderer);
