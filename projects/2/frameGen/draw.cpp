@@ -22,19 +22,6 @@ void Draw::drawCircle(
     }
   }
 }
-void Draw::drawEllipse(
-  SDL_Point center, int xrad, int yrad, SDL_Color color) {
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-    for (int w = 0; w < xrad; w++) {
-      for (int h = 0; h < yrad; h++) {
-        int dx = xrad - w; // horizontal offset
-        int dy = yrad - h; // vertical offset
-        if (((dx*dx)/(xrad*xrad) <= (dy*dy)/(yrad*yrad))) {
-          SDL_RenderDrawPoint(renderer, (center.x + dx), (center.y + dy));
-        }
-      }
-    }
-}
 
 void Draw::drawRect(SDL_Point center, int width, int height, SDL_Color color){
   SDL_SetRenderDrawColor(renderer, color.r,color.g,color.b,color.a);
@@ -43,12 +30,22 @@ void Draw::drawRect(SDL_Point center, int width, int height, SDL_Color color){
   rect->y = center.y;
   rect->w = width;
   rect->h = height;
-  SDL_RenderDrawRect(renderer,rect);
-  //do I need a deconstructor
-  //delete(rect);
+  SDL_RenderFillRect(renderer,rect);
+  //do i need to free rect?
+}
+void Draw::drawPentagon(SDL_Point tip,int width,int height,SDL_Color color){
+      drawRect(tip,width/2,height,color);
+      
 }
 
-void Draw::drawBackbone(SDL_Point center, int radius,float startAngle, float endAngle, SDL_Color color){//angles in in radians
+void drawHexagon(SDL_Point tip,SDL_Color color){
+
+}
+void drawTriangle(SDL_Point center,SDL_Color color){
+
+}
+
+void Draw::drawDNA(SDL_Point center, int radius,float startAngle, float endAngle, SDL_Color color){//angles in in radians
     SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
 
     startAngle = startAngle * PI /180;//convert to radians
@@ -61,7 +58,6 @@ void Draw::drawBackbone(SDL_Point center, int radius,float startAngle, float end
 
     //calc mid point
     float midAngle = (startAngle + endAngle)/2;
-    float quarterAngle = (startAngle + endAngle)/4;
 
     //inital x and y
     int xi = radius * cos(startAngle);

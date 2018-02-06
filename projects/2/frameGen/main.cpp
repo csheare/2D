@@ -20,23 +20,14 @@ int main(void) {
   SDL_Point center = {0, 0};
   SDL_Point center2 = {200, 200};
   SDL_Point center3 = {400, 400};
-  SDL_Point center4 = {300, 300};
-  SDL_Point center5 = {400, 400};
-  SDL_Point center6 = {500, 500};
   SDL_Color color = {255,0,0,0};
   SDL_Color color2 = {0,0,255,0};
   Draw d(renderer);
-  d.drawBackbone(center,100,0,90, color);
-  d.drawBackbone(center2,100,0,90, color2);
-  d.drawBackbone(center3,100,0,90, color);
-  // d.drawBackbone(center4,50,0,90, color2);
-  // d.drawBackbone(center5,50,0,90, color);
-  // d.drawBackbone(center6,50,0,90, color2);
+  // d.drawDNA(center,100,0,90, color);
+  // d.drawDNA(center2,100,0,90, color2);
+  // d.drawDNA(center3,100,0,90, color);
+  d.drawPentagon(center2,50,50,color);
 
-  //SDL_Point center2 = {220,140};
-  //SDL_Color color2 = {255,0,255,255};
-  //center is upper left hand corner
-  //d.drawRect(center2,200,200,color2);
 
   SDL_RenderPresent(renderer);
   FrameGenerator frameGen(renderer, window, WIDTH, HEIGHT, NAME);
