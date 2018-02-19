@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string.h>
 class string{
 public:
 	string(const char* n) : buf(new char[strlen(n) +1]){

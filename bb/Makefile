@@ -1,21 +1,31 @@
 CC = g++
 
 CFLAGS = -g Wall
-TARGET = myprog
 
-init_order: init_order.cpp 
-	$(CC) -o $(TARGET) $^
+BINS= init_order static_function assign leastpriv Pokemon pointandref
+
+all: $(BINS)
+
+pointandref: pointandref.cpp
+	$(CC) -o pointandref $^
+
+init_order: init_order.cpp
+	$(CC) -o init_order $^
 
 static_function: static_function.cpp
-	$(CC) -o $(TARGET) $^
+	$(CC) -o static_function $^
 
 assign: assign.cpp
-	$(CC) -o $(TARGET) $^
+	$(CC) -o assign $^
 
 leastpriv: leastpriv.cpp
-	$(CC) -o $(TARGET) $^
+	$(CC) -o leastpriv $^
+
+Pokemon: Pokemon.cpp
+	$(CC) -o Pokemon $^
+
+%: %.c
+	$(CC) -o $@ $< -g
 
 clean:
-	rm $(TARGET)
-run:
-	./$(TARGET)
+	rm $(BINS)

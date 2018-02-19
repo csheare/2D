@@ -11,7 +11,7 @@ public:
 		return *this;
 	}
 private:
-	char * buf; 
+	char * buf;
 };
 
 class TestAssign{
@@ -30,7 +30,7 @@ private:
 
 
 int main(){
-	TestAssign name("dog");
-	TestAssign2 name2("cat");
+	//TestAssign name("dog");
+	//TestAssign2 name2("cat");
 	return 0;
 }
