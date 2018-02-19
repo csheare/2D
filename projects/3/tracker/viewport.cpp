@@ -7,26 +7,35 @@ Viewport& Viewport::getInstance() {
   return viewport;
 }
 
-Viewport::Viewport() : 
+Viewport::Viewport() :
   gdata(Gamedata::getInstance()),
   position(0, 0),
   worldWidth(gdata.getXmlInt("world/width")),
   worldHeight(gdata.getXmlInt("world/height")),
-  viewWidth(gdata.getXmlInt("view/width")), 
+  viewWidth(gdata.getXmlInt("view/width")),
   viewHeight(gdata.getXmlInt("view/height")),
   objWidth(0), objHeight(0),
-  objectToTrack(NULL) 
+  objectToTrack(NULL)
 {}
 
-void Viewport::setObjectToTrack(const Drawable *obj) { 
-  objectToTrack = obj; 
+void Viewport::setObjectToTrack(const Drawable *obj) {
+  objectToTrack = obj;
   objWidth = objectToTrack->getScaledWidth();
   objHeight = objectToTrack->getScaledHeight();
 }
 
-void Viewport::draw() const {
+void Viewport::draw(int fps) const {
+  SDL_Color c = {255,123,5,0};
   IoMod::getInstance().
     writeText("Tracking: "+objectToTrack->getName(), 30, 30);
+  IoMod::getInstance().
+    writeText("Name: Courtney ", 0, 450,c);
+    std::stringstream ss;
+    std::string s;
+    ss <<fps;
+    ss >> s;
+  IoMod::getInstance().
+      writeText("FPS:" + s, 30, 100);
 }
 
 void Viewport::update() {

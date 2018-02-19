@@ -10,7 +10,7 @@
 #include "engine.h"
 #include "frameGenerator.h"
 
-Engine::~Engine() { 
+Engine::~Engine() {
   delete star;
   delete spinningStar;
   std::cout << "Terminating program" << std::endl;
@@ -21,32 +21,36 @@ Engine::Engine() :
   io( IoMod::getInstance() ),
   clock( Clock::getInstance() ),
   renderer( rc->getRenderer() ),
-  world("back", Gamedata::getInstance().getXmlInt("back/factor") ),
+  front("front", Gamedata::getInstance().getXmlInt("front/factor") ),
+  back("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   viewport( Viewport::getInstance() ),
   star(new Sprite("YellowStar")),
   spinningStar(new MultiSprite("SpinningStar")),
   currentSprite(0),
   makeVideo( false )
 {
-  
+
   Viewport::getInstance().setObjectToTrack(star);
   std::cout << "Loading complete" << std::endl;
 }
 
 void Engine::draw() const {
-  world.draw();
+  back.draw();
+  front.draw();
+
 
   star->draw();
   spinningStar->draw();
 
-  viewport.draw();
+  viewport.draw(clock.getFps());
   SDL_RenderPresent(renderer);
 }
 
 void Engine::update(Uint32 ticks) {
   star->update(ticks);
   spinningStar->update(ticks);
-  world.update();
+  back.update();
+  front.update();
   viewport.update(); // always update viewport last
 }
 

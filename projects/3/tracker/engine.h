@@ -2,9 +2,9 @@
 #include <SDL.h>
 #include "ioMod.h"
 #include "renderContext.h"
-#include "clock.h"
 #include "world.h"
 #include "viewport.h"
+#include "clock.h"
 
 class Engine {
 public:
@@ -19,7 +19,8 @@ private:
   Clock& clock;
 
   SDL_Renderer * const renderer;
-  World world;
+  World front;
+  World back;
   Viewport& viewport;
 
   Drawable* star;
