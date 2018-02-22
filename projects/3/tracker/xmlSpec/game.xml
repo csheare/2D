@@ -12,23 +12,29 @@
 <username>malloy</username>
 
 <view>
-  <width>854</width>
+  <width>804</width>
   <height>480</height>
 </view>
 
 <world>
-  <width>1920</width>
-  <height>770</height>
+  <width>8000</width>
+  <height>600</height>
 </world>
 
 <back>
-  <file>assets/checkerboard.bmp</file>
-  <factor>-1</factor>
-  <transparency>false</transparency>
+  <file>assets/clouds.jpg</file>
+  <factor>3</factor>
+  <transparency>true</transparency>
 </back>
-<front>
-  <file>assets/mountains.png</file>
+
+<middle>
+  <file>assets/middle.png</file>
   <factor>2</factor>
+  <transparency>true</transparency>
+</middle>
+<front>
+  <file>assets/front.png</file>
+  <factor>1</factor>
   <transparency>true</transparency>
 </front>
 

@@ -22,6 +22,7 @@ Engine::Engine() :
   clock( Clock::getInstance() ),
   renderer( rc->getRenderer() ),
   front("front", Gamedata::getInstance().getXmlInt("front/factor") ),
+  middle("middle", Gamedata::getInstance().getXmlInt("middle/factor") ),
   back("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   viewport( Viewport::getInstance() ),
   star(new Sprite("YellowStar")),
@@ -36,6 +37,7 @@ Engine::Engine() :
 
 void Engine::draw() const {
   back.draw();
+  middle.draw();
   front.draw();
 
 
@@ -50,6 +52,7 @@ void Engine::update(Uint32 ticks) {
   star->update(ticks);
   spinningStar->update(ticks);
   back.update();
+  middle.update();
   front.update();
   viewport.update(); // always update viewport last
 }
