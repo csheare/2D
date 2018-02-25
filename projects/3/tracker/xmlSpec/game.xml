@@ -9,7 +9,10 @@
 <period>17</period>
 
 <maxFrames>300</maxFrames>
-<username>malloy</username>
+<username>csheare</username>
+
+<numOfSprites>10</numOfSprites>
+
 
 <view>
   <width>804</width>
@@ -22,7 +25,7 @@
 </world>
 
 <back>
-  <file>assets/clouds.jpg</file>
+  <file>assets/clouds.png</file>
   <factor>3</factor>
   <transparency>true</transparency>
 </back>
@@ -37,6 +40,7 @@
   <factor>1</factor>
   <transparency>true</transparency>
 </front>
+
 
 <font name="font">
   <file>fonts/arial.ttf</file>

@@ -24,10 +24,9 @@ private:
   World middle;
   World back;
   Viewport& viewport;
-
-  Drawable* star;
-  Drawable* spinningStar;
   int currentSprite;
+  std::vector<Drawable*> sprites;
+  int numOfSprites;
 
   bool makeVideo;
 
