@@ -52,20 +52,22 @@
 </font>
 
 <SpinningStar>
-  <file>assets/spinstar.png</file>
+  <file>assets/windspinner3.png</file>
   <startLoc x="50" y="140"/>
   <frames>4</frames>
   <imageWidth>32</imageWidth>
   <imageHeight>32</imageHeight>
-  <frameInterval>50</frameInterval>
+  <frameInterval>3</frameInterval>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
 </SpinningStar>
 
 <YellowStar>
-  <file>assets/yellowstar32.png</file>
+  <file>assets/windspinner3.png</file>
   <startLoc x="227" y="240"/>
+  <imageWidth>5</imageWidth>
+  <imageHeight>5</imageHeight>
   <speedX>300</speedX>
   <speedY>300</speedY>
   <transparency>false</transparency>
