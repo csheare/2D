@@ -27,7 +27,9 @@ public:
   }
 
 protected:
-  std::vector<Image *> images;
+  std::vector<Image*> images;
+  std::vector<Image *> imagesRight;
+  std::vector<Image *> imagesLeft;
 
   unsigned currentFrame;
   unsigned numberOfFrames;

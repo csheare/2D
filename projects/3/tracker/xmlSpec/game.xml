@@ -50,18 +50,31 @@
   <blue>0</blue>
   <alpha>0</alpha>
 </font>
+<Eagle>
+  <Left>
+    <file>assets/eagleL.png</file>
+    <startLoc x="50" y="140"/>
+    <frames>4</frames>
+    <imageWidth>119</imageWidth>
+    <imageHeight>65</imageHeight>
+    <frameInterval>300</frameInterval>
+    <speedX>200</speedX>
+    <speedY>200</speedY>
+    <transparency>false</transparency>
+  </Left>
 
-<StarSpinner>
-  <file>assets/spinstar.png</file>
-  <startLoc x="50" y="140"/>
-  <frames>4</frames>
-  <imageWidth>32</imageWidth>
-  <imageHeight>32</imageHeight>
-  <frameInterval>3</frameInterval>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
-  <transparency>false</transparency>
-</StarSpinner>
+  <Right>
+    <file>assets/eagleR.png</file>
+    <startLoc x="50" y="140"/>
+    <frames>4</frames>
+    <imageWidth>119</imageWidth>
+    <imageHeight>65</imageHeight>
+    <frameInterval>300</frameInterval>
+    <speedX>200</speedX>
+    <speedY>200</speedY>
+    <transparency>false</transparency>
+  </Right>
+</Eagle>
 
 
 <WindSpinner>

@@ -28,16 +28,14 @@ Engine::Engine() :
   back("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   viewport( Viewport::getInstance()),
   currentSprite(0),
-  sprites({new TwoWaySprite("StarSpinner"), new Sprite("Boulder"), new MultiSprite("WindSpinner")}),
+  sprites({new TwoWaySprite("Eagle"), new Sprite("Boulder"), new MultiSprite("WindSpinner")}),
   numOfSprites(Gamedata::getInstance().getXmlInt("numOfSprites")),
   makeVideo( false )
 {
   for(int i=0;i<numOfSprites;i++){
-    sprites.push_back(new MultiSprite("WindSpinner"));
+    sprites.push_back(new TwoWaySprite("Eagle"));
     sprites.push_back(new Sprite("Boulder"));
   }
-  //sprites.push_back(new MultiSprite("SpinningStar"));
-
   Viewport::getInstance().setObjectToTrack(sprites.at(sprites.size()/2));
   std::cout << "Loading complete" << std::endl;
 }
