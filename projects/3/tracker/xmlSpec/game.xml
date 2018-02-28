@@ -51,6 +51,19 @@
   <alpha>0</alpha>
 </font>
 
+<StarSpinner>
+  <file>assets/spinstar.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>32</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>3</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+</StarSpinner>
+
+
 <WindSpinner>
   <file>assets/windspinner5.png</file>
   <startLoc x="50" y="140"/>

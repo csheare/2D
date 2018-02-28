@@ -6,6 +6,7 @@
 #include <iomanip>
 #include "sprite.h"
 #include "multisprite.h"
+#include "twowaysprite.h"
 #include "gamedata.h"
 #include "engine.h"
 #include "frameGenerator.h"
@@ -27,14 +28,13 @@ Engine::Engine() :
   back("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   viewport( Viewport::getInstance()),
   currentSprite(0),
-  sprites({new Sprite("Boulder"), new MultiSprite("WindSpinner")}),
+  sprites({new TwoWaySprite("StarSpinner"), new Sprite("Boulder"), new MultiSprite("WindSpinner")}),
   numOfSprites(Gamedata::getInstance().getXmlInt("numOfSprites")),
   makeVideo( false )
 {
   for(int i=0;i<numOfSprites;i++){
     sprites.push_back(new MultiSprite("WindSpinner"));
     sprites.push_back(new Sprite("Boulder"));
-
   }
   //sprites.push_back(new MultiSprite("SpinningStar"));
 
