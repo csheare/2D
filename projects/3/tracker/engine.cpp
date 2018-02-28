@@ -27,12 +27,14 @@ Engine::Engine() :
   back("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   viewport( Viewport::getInstance()),
   currentSprite(0),
-  sprites({new Sprite("YellowStar"), new MultiSprite("SpinningStar")}),
+  sprites({new Sprite("Boulder"), new MultiSprite("WindSpinner")}),
   numOfSprites(Gamedata::getInstance().getXmlInt("numOfSprites")),
   makeVideo( false )
 {
   for(int i=0;i<numOfSprites;i++){
-    sprites.push_back(new Sprite("YellowStar"));
+    sprites.push_back(new MultiSprite("WindSpinner"));
+    sprites.push_back(new Sprite("Boulder"));
+
   }
   //sprites.push_back(new MultiSprite("SpinningStar"));
 
@@ -44,10 +46,6 @@ void Engine::draw() const {
   back.draw();
   middle.draw();
   front.draw();
-
-  //star->draw();
-  //spinningStar->draw();
-
 
   for(auto d : sprites){
     d->draw();
@@ -79,12 +77,6 @@ void Engine::switchSprite(){
   ++currentSprite;
   currentSprite = currentSprite % sprites.size();
 
-  // if ( currentSprite ) {
-  //   Viewport::getInstance().setObjectToTrack(spinningStar);
-  // }
-  // else {
-  //   Viewport::getInstance().setObjectToTrack(star);
-  // }
   Viewport::getInstance().setObjectToTrack(sprites.at(currentSprite));
 }
 
