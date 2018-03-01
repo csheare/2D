@@ -33,10 +33,10 @@ Engine::Engine() :
   makeVideo( false )
 {
   for(int i=0;i<numOfSprites;i++){
-    sprites.push_back(new TwoWaySprite("Eagle"));
+    sprites.push_back(new MultiSprite("WindSpinner"));
     sprites.push_back(new Sprite("Boulder"));
   }
-  Viewport::getInstance().setObjectToTrack(sprites.at(sprites.size()/2));
+  Viewport::getInstance().setObjectToTrack(sprites.at(currentSprite));
   std::cout << "Loading complete" << std::endl;
 }
 
@@ -57,7 +57,7 @@ void Engine::update(Uint32 ticks) {
   static Uint32 currentTicks=0;//automatically zero!
   currentTicks+=ticks;
   if(currentTicks >= 5000){
-      switchSprite();
+      //switchSprite();
       currentTicks = 0 ;
   }
   for(auto d : sprites){

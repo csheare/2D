@@ -11,7 +11,7 @@
 <maxFrames>300</maxFrames>
 <username>csheare</username>
 
-<numOfSprites>10</numOfSprites>
+<numOfSprites>2</numOfSprites>
 
 
 <view>
@@ -20,7 +20,7 @@
 </view>
 
 <world>
-  <width>8000</width>
+  <width>2000</width>
   <height>600</height>
 </world>
 
@@ -92,8 +92,8 @@
 <Boulder>
   <file>assets/boulder.png</file>
   <startLoc x="227" y="240"/>
-  <imageWidth>5</imageWidth>
-  <imageHeight>5</imageHeight>
+  <imageWidth>27</imageWidth>
+  <imageHeight>27</imageHeight>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>

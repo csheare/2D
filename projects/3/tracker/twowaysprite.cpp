@@ -76,7 +76,7 @@ void TwoWaySprite::update(Uint32 ticks) {
   static int direction = 1;
   static Uint32 currentTicks=0;
   currentTicks+=ticks;
-  if(currentTicks >= 10000){
+  if(currentTicks >= 6000){
 
       direction *= -1;
       currentTicks = 0 ;
