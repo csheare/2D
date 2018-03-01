@@ -11,7 +11,7 @@
 <maxFrames>300</maxFrames>
 <username>csheare</username>
 
-<numOfSprites>2</numOfSprites>
+<numOfSprites>7</numOfSprites>
 
 
 <view>
@@ -84,8 +84,8 @@
   <imageWidth>32</imageWidth>
   <imageHeight>32</imageHeight>
   <frameInterval>3</frameInterval>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
   <transparency>false</transparency>
 </WindSpinner>
 
@@ -94,8 +94,8 @@
   <startLoc x="227" y="240"/>
   <imageWidth>27</imageWidth>
   <imageHeight>27</imageHeight>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
+  <speedX>400</speedX>
+  <speedY>400</speedY>
   <transparency>false</transparency>
 </Boulder>
 
