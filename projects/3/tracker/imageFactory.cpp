@@ -20,12 +20,14 @@ ImageFactory::~ImageFactory() {
   std::map<std::string,SDL_Texture*>::const_iterator ti = textures.begin();
   while(ti != textures.end()){
     SDL_DestroyTexture(ti->second);
+    ti++;
   }
 
   std::map<std::string,Image*>::const_iterator fi = images.begin();
   while(fi != images.end()){
     std::cout << "deleting "<< fi->first << std::endl;
     delete fi->second;
+    fi++;
   }
 
   // Free multi-image containers
