@@ -1,22 +1,31 @@
-Name:
+Name:Courtney Shearer
 
-Course:
+Course: CPSC 4160
 
-Clemson Email Address:
+Clemson Email Address: csheare
 
-Project no:
+Project no:3
 
-Project due date:
+Project due date: March 2, 2018
 
 Project description:
 
-What sprite did I repeat at least 7 times?
+The purpose of this project was to help me become better familiar with C++ language constructs, design patterns, data-driven programming, and a tracker framework. I used parallax scrolling to make a scene from Zion national park. I made a boulder sprite, a windspinner multisprint, and a eagle two way multisprite.
 
-http://clipart-library.com/boulder-cliparts.html
-https://commons.wikimedia.org/wiki/File:Franz_A._Bischoff_-_Zion_Park.jpg
+What sprite did I repeat at least 7 times?
+I repeated my boulder sprite and my windspinner multisprite 7 times each.
 
 What sprite (not Sprite or MultiSprite) did I design?
+I designed a two way multi frame sprite that is a plump eagle.
 
 The easiest part of this project:
+Getting the tracker frame work up and running.
 
-Problems that I had in completing this project:
+Problems that I had in completing this project
+I struggled with understanding the singleton pattern variations, and I struggled with making edits tomy eagle and wind spinner sprites.
+
+Sources:
+Zion Background: https://commons.wikimedia.org/wiki/File:Franz_A._Bischoff_-_Zion_Park.jpg
+Eagle: https://dribbble.com/shots/1451359-Eagle-Sprite-Sheet
+Boulder: http://clipart-library.com/boulder-cliparts.html
+WindSpinner: I made this.:
