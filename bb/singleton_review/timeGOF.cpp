@@ -17,7 +17,9 @@ public:
 	int getCount() const{
 		return count;
 	}
-
+	void incrementCount(){
+		count++;
+	}
 private:
 	static CounterG * instance;
 	CounterG(): count(0) , name(new char(strlen("Default") + 1)){
@@ -25,14 +27,14 @@ private:
                 std::cout<<"default"<<std::endl;
         }
         //copy
-        // CounterG(const CounterG& c): count(c.count), name(new char(strlen(c.name)+1)){
-        //         strcpy(name, c.name);
-        //         std::cout<< "copy"<<std::endl;
-        // }
-        // CounterG(int x,const char * n): count(x), name(new char(strlen(n)+1)){
-        //         strcpy(name, n);
-        //         std::cout<<"convert"<<std::endl;
-        // }
+        CounterG(const CounterG& c): count(c.count), name(new char(strlen(c.name)+1)){
+                 strcpy(name, c.name);
+                 std::cout<< "copy"<<std::endl;
+         }
+        CounterG(int x,const char * n): count(x), name(new char(strlen(n)+1)){
+                 strcpy(name, n);
+                 std::cout<<"convert"<<std::endl;
+         }
 	CounterG & operator=(const CounterG & rhs){
 		std::cout<<"assign"<<std::endl;
 		if(this == &rhs){
@@ -71,6 +73,5 @@ CounterG* CounterG::instance = NULL;
 int main(){
 	CounterG * cg1 = CounterG::getInstance();
 	CounterG * cg2 = CounterG::getInstance();
-	std::cout<<*cg1<<std::endl;
-	std::cout<<*cg2<<std::endl;
+	cg2->incrementCount();	
 }
