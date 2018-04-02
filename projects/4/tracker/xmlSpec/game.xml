@@ -1,0 +1,102 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation.
+     So make sure to include your name as part of the screenTitle -->
+<title>The Tracker Framework</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>300</maxFrames>
+<username>csheare</username>
+
+<numOfSprites>7</numOfSprites>
+
+
+<view>
+  <width>804</width>
+  <height>480</height>
+</view>
+
+<world>
+  <width>2000</width>
+  <height>600</height>
+</world>
+
+<back>
+  <file>assets/clouds.png</file>
+  <factor>3</factor>
+  <transparency>true</transparency>
+</back>
+
+<middle>
+  <file>assets/middle.png</file>
+  <factor>2</factor>
+  <transparency>true</transparency>
+</middle>
+<front>
+  <file>assets/front.png</file>
+  <factor>1</factor>
+  <transparency>true</transparency>
+</front>
+
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>24</size>
+  <red>255</red>
+  <green>0</green>
+  <blue>0</blue>
+  <alpha>0</alpha>
+</font>
+<Eagle>
+  <Left>
+    <file>assets/eagleL.png</file>
+    <startLoc x="50" y="140"/>
+    <frames>4</frames>
+    <imageWidth>119</imageWidth>
+    <imageHeight>65</imageHeight>
+    <frameInterval>300</frameInterval>
+    <speedX>200</speedX>
+    <speedY>200</speedY>
+    <transparency>false</transparency>
+  </Left>
+
+  <Right>
+    <file>assets/eagleR.png</file>
+    <startLoc x="50" y="140"/>
+    <frames>4</frames>
+    <imageWidth>119</imageWidth>
+    <imageHeight>65</imageHeight>
+    <frameInterval>300</frameInterval>
+    <speedX>200</speedX>
+    <speedY>200</speedY>
+    <transparency>false</transparency>
+  </Right>
+</Eagle>
+
+
+<WindSpinner>
+  <file>assets/windspinner5.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>32</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>3</frameInterval>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
+  <transparency>false</transparency>
+</WindSpinner>
+
+<Boulder>
+  <file>assets/boulder.png</file>
+  <startLoc x="227" y="240"/>
+  <imageWidth>27</imageWidth>
+  <imageHeight>27</imageHeight>
+  <speedX>400</speedX>
+  <speedY>400</speedY>
+  <transparency>false</transparency>
+</Boulder>
+
+</GameData>
