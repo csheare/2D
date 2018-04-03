@@ -4,12 +4,12 @@
 #include "renderContext.h"
 
 SubjectSprite::SubjectSprite( const std::string& name) :
-  TwoWaySprite(name),
+  Player(name),
   observers()
 { }
 
 SubjectSprite::SubjectSprite(const SubjectSprite& s) :
-  TwoWaySprite(s),
+  Player(s),
   observers( s.observers )
   { }
 
@@ -25,7 +25,7 @@ void SubjectSprite::detach( SmartSprite* o ) {
 }
 
 void SubjectSprite::update(Uint32 ticks) {
-  MultiSprite::update(ticks);
+  Player::update(ticks);
   std::list<SmartSprite*>::iterator ptr = observers.begin();
   while ( ptr != observers.end() ) {
     (*ptr)->setPlayerPos( getPosition() );

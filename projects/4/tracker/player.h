@@ -2,11 +2,11 @@
 #define PLAYER__H
 
 #include "twowaysprite.h"
-#include "subjectSprite.h"
+
 
 // In this example the player is derived from MultiSprite.
 // However, there are many options.
-class Player : public SubjectSprite {
+class Player : public TwoWaySprite {
 public:
   Player(const std::string&);
   Player(const Player&);

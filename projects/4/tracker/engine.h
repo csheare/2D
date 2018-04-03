@@ -6,7 +6,7 @@
 #include "viewport.h"
 #include "clock.h"
 #include "collisionStrategy.h"
-#include "player.h"
+#include "subjectSprite.h"
 
 class Engine {
 public:
@@ -29,7 +29,7 @@ private:
   std::vector<SmartSprite*> sprites;
   //std::vector<Drawable*> sprites;
   int numOfSprites;
-  Player * player;
+  SubjectSprite * player;
   std::vector<CollisionStrategy*> strategies;
   int currentStrategy;
   bool collision;

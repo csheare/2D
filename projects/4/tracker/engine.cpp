@@ -38,7 +38,7 @@ Engine::Engine() :
   viewport( Viewport::getInstance()),
   sprites(),
   numOfSprites(Gamedata::getInstance().getXmlInt("numOfSprites")),
-  player(new Player("Eagle")),
+  player(new SubjectSprite("Eagle")),
   strategies(),
   currentStrategy(0),
   collision(false),
