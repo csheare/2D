@@ -7,14 +7,22 @@
 #include "sprite.h"
 #include "multisprite.h"
 #include "twowaysprite.h"
+#include "smartsprite.h"
 #include "gamedata.h"
 #include "engine.h"
 #include "frameGenerator.h"
 #include "player.h"
+#include "subjectSprite.h"
+
+const SDL_Color yellow = {255, 255, 0, 255};
 
 Engine::~Engine() {
-  for(auto d : sprites){
-    delete d;
+  delete player;
+  for ( Drawable* sprite : sprites ) {
+    delete sprite;
+  }
+  for ( CollisionStrategy* strategy : strategies ) {
+    delete strategy;
   }
   std::cout << "Terminating program" << std::endl;
 }
@@ -28,16 +36,28 @@ Engine::Engine() :
   middle("middle", Gamedata::getInstance().getXmlInt("middle/factor") ),
   back("back", Gamedata::getInstance().getXmlInt("back/factor") ),
   viewport( Viewport::getInstance()),
-  currentSprite(0),
-  sprites({new TwoWaySprite("Eagle"), new Sprite("Boulder"), new MultiSprite("WindSpinner")}),
+  sprites(),
   numOfSprites(Gamedata::getInstance().getXmlInt("numOfSprites")),
   player(new Player("Eagle")),
-  makeVideo( false )
+  strategies(),
+  currentStrategy(0),
+  collision(false),
+  makeVideo(false)
 {
+  sprites.reserve(numOfSprites);
+  Vector2f pos = player->getPosition();
+  int w = player->getScaledWidth();
+  int h = player->getScaledHeight();
   for(int i=0;i<numOfSprites;i++){
-    sprites.push_back(new MultiSprite("WindSpinner"));
-    sprites.push_back(new Sprite("Boulder"));
+    //sprites.push_back(new MultiSprite("WindSpinner"));
+    sprites.push_back(new SmartSprite("Boulder",pos, w, h));
+    player->attach( sprites[i] );
   }
+
+  strategies.push_back( new RectangularCollisionStrategy );
+  strategies.push_back( new PerPixelCollisionStrategy );
+  strategies.push_back( new MidPointCollisionStrategy );
+
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
 }
@@ -46,28 +66,43 @@ void Engine::draw() const {
   back.draw();
   middle.draw();
   front.draw();
-  player->draw();
-
-  for(auto d : sprites){
-    d->draw();
+  IoMod::getInstance().writeText("Press m to change strategy", 500, 60);
+  for(const Drawable* sprite : sprites){
+    sprite->draw();
   }
-
+  std::stringstream strm;
+  strm << sprites.size() << " Smart Sprites Remaining";
+  IoMod::getInstance().writeText(strm.str(), 30, 60);
+  strategies[currentStrategy]->draw();
+  if ( collision ) {
+    IoMod::getInstance().writeText("Oops: Collision", 500, 90);
+  }
+  player->draw();
   viewport.draw(clock.getFps());
   SDL_RenderPresent(renderer);
 }
 
+void Engine::checkForCollisions() {
+  auto it = sprites.begin();
+  while ( it != sprites.end() ) {
+    if ( strategies[currentStrategy]->execute(*player, **it) ) {
+      SmartSprite* doa = *it;
+      //player->detach(doa);
+      //delete doa;
+      //it = sprites.erase(it);
+      doa->update(clock.getElapsedTicks());
+    }
+    ++it;
+  }
+}
+
 void Engine::update(Uint32 ticks) {
-  // static Uint32 currentTicks=0;//automatically zero!
-  // currentTicks+=ticks;
-  // if(currentTicks >= 5000){
-  //     //switchSprite();
-  //     currentTicks = 0 ;
-  // }
-  for(auto d : sprites){
-    d->update(ticks);
+  checkForCollisions();
+  player->update(ticks);
+  for(Drawable* s : sprites){
+    s->update(ticks);
   }
 
-  player->update(ticks);
   back.update();
   middle.update();
   front.update();
@@ -75,12 +110,7 @@ void Engine::update(Uint32 ticks) {
 
 }
 
-void Engine::switchSprite(){
-  ++currentSprite;
-  currentSprite = currentSprite % sprites.size();
 
-  Viewport::getInstance().setObjectToTrack(sprites.at(currentSprite));
-}
 
 void Engine::play() {
   SDL_Event event;
@@ -99,12 +129,12 @@ void Engine::play() {
           done = true;
           break;
         }
+        if ( keystate[SDL_SCANCODE_M] ) {
+          currentStrategy = (1 + currentStrategy) % strategies.size();
+        }
         if ( keystate[SDL_SCANCODE_P] ) {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
-        }
-        if ( keystate[SDL_SCANCODE_T] ) {
-          switchSprite();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;

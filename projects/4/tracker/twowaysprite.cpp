@@ -22,25 +22,20 @@ void TwoWaySprite::advanceFrame(Uint32 ticks) {
 }
 
 TwoWaySprite::TwoWaySprite( const std::string& name) :
-  Drawable(name,
-           Vector2f(Gamedata::getInstance().getXmlInt(name+"/Right/startLoc/x"),
-                    Gamedata::getInstance().getXmlInt(name+"/Right/startLoc/y")),
-           makeVelocity(Gamedata::getInstance().getXmlInt(name+"/Right/speedX"),
-                    Gamedata::getInstance().getXmlInt(name+"/Right/speedY"))
-           ),
-  images( RenderContext::getInstance()->getImages(name + "/Right")),
-  imagesRight(RenderContext::getInstance()->getImages(name + "/Right")),
-  imagesLeft(RenderContext::getInstance()->getImages(name + "/Left")),
+MultiSprite(name),
+  images( RenderContext::getInstance()->getImages(name)),
+  imagesRight(RenderContext::getInstance()->getImages(name)),
+  imagesLeft(RenderContext::getInstance()->getImages(name + "L")),
   currentFrame(0),
-  numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/Right/frames") ),
-  frameInterval( Gamedata::getInstance().getXmlInt(name+"/Right/frameInterval")),
+  numberOfFrames( Gamedata::getInstance().getXmlInt(name+"/frames") ),
+  frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
 
 TwoWaySprite::TwoWaySprite(const TwoWaySprite& s) :
-  Drawable(s),
+  MultiSprite(s),
   images(s.images),
   imagesRight(s.imagesRight),
   imagesLeft(s.imagesLeft),
@@ -72,25 +67,6 @@ void TwoWaySprite::draw() const {
 
 void TwoWaySprite::update(Uint32 ticks) {
   advanceFrame(ticks);
-  //after so many game clock cycle
-  //static int direction = 1;
-  //static Uint32 currentTicks=0;
-  //currentTicks+=ticks;
-  /*if(currentTicks >= 6000){
-
-      direction *= -1;
-      currentTicks = 0 ;
-
-      if (direction == -1) {//set right
-        setVelocityX( fabs( getVelocityX() ) );
-        images = imagesRight;
-      }
-      if (direction == 1) {
-        setVelocityX( -fabs( getVelocityX() ) );
-        images = imagesLeft;
-      }
-
-  }*/
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
   setPosition(getPosition() + incr);
 
@@ -103,14 +79,11 @@ void TwoWaySprite::update(Uint32 ticks) {
   }
 
   if ( getX() > worldWidth-getScaledWidth()) {//set right
-    //setImagesLeft();
     setVelocityX( -fabs( getVelocityX() ) );
 
   }
   if (getX() < 0) {
-    //setImagesRight();
     setVelocityX( fabs( getVelocityX() ) );
-     //set left image
   }
 
 }

@@ -5,6 +5,8 @@
 #include "world.h"
 #include "viewport.h"
 #include "clock.h"
+#include "collisionStrategy.h"
+#include "player.h"
 
 class Engine {
 public:
@@ -24,10 +26,13 @@ private:
   World middle;
   World back;
   Viewport& viewport;
-  int currentSprite;
-  std::vector<Drawable*> sprites;
+  std::vector<SmartSprite*> sprites;
+  //std::vector<Drawable*> sprites;
   int numOfSprites;
-  Drawable * player;
+  Player * player;
+  std::vector<CollisionStrategy*> strategies;
+  int currentStrategy;
+  bool collision;
 
   bool makeVideo;
 

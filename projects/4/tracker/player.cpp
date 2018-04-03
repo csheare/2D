@@ -1,13 +1,13 @@
 #include "player.h"
 
 Player::Player( const std::string& name) :
-  TwoWaySprite(name),
+  SubjectSprite(name),
   collision(false),
   initialVelocity(getVelocity())
 { }
 
 Player::Player(const Player& s) :
-  TwoWaySprite(s),
+  SubjectSprite(s.getName()),
   collision(s.collision),
   initialVelocity(s.getVelocity())
   { }
@@ -20,8 +20,7 @@ Player& Player::operator=(const Player& s) {
 }
 
 void Player::stop() {
-  //setVelocity( Vector2f(0, 0) );
-  setVelocityX( 0.93*getVelocityX() );
+  setVelocityX( 0.5*getVelocityX() );
   setVelocityY(0);
 }
 

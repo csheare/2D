@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 #include <cmath>
-#include "drawable.h"
+#include "multisprite.h"
 
-class TwoWaySprite : public Drawable {
+class TwoWaySprite : public MultiSprite {
 public:
   TwoWaySprite(const std::string&);
   TwoWaySprite(const TwoWaySprite&);
