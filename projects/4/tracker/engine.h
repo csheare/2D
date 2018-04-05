@@ -7,6 +7,7 @@
 #include "clock.h"
 #include "collisionStrategy.h"
 #include "subjectSprite.h"
+#include "hud.h"
 
 class Engine {
 public:
@@ -19,6 +20,7 @@ public:
 private:
   const RenderContext* rc;
   const IoMod& io;
+  Hud& hud;
   Clock& clock;
 
   SDL_Renderer * const renderer;

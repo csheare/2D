@@ -25,6 +25,7 @@ OBJS = \
 	subjectSprite.o\
 	vector2f.o \
 	clock.o \
+	hud.o \
 	engine.o \
 	main.o
 EXEC = run

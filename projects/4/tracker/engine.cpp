@@ -14,8 +14,6 @@
 #include "player.h"
 #include "subjectSprite.h"
 
-const SDL_Color yellow = {255, 255, 0, 255};
-
 Engine::~Engine() {
   delete player;
   for ( Drawable* sprite : sprites ) {
@@ -30,6 +28,7 @@ Engine::~Engine() {
 Engine::Engine() :
   rc( RenderContext::getInstance() ),
   io( IoMod::getInstance() ),
+  hud(Hud::getInstance()),
   clock( Clock::getInstance() ),
   renderer( rc->getRenderer() ),
   front("front", Gamedata::getInstance().getXmlInt("front/factor") ),
@@ -49,9 +48,13 @@ Engine::Engine() :
   int w = player->getScaledWidth();
   int h = player->getScaledHeight();
   for(int i=0;i<numOfSprites;i++){
-    //sprites.push_back(new MultiSprite("WindSpinner"));
-    sprites.push_back(new SmartSprite("Boulder",pos, w, h));
+    //std::cout << "Adding Sprite!" <<std::endl;
+    sprites.push_back(new SmartSprite("GreenBird",pos, w, h));
+    sprites[i]->setVelocity(sprites[i]->makeVelocity(sprites[i]->getVelocityX(), sprites[i]->getVelocityY()));
     player->attach( sprites[i] );
+  hud.draw();
+  hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line1"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")-30);
+  hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line2"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")-5);
   }
 
   strategies.push_back( new RectangularCollisionStrategy );
@@ -60,6 +63,7 @@ Engine::Engine() :
 
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
+  hud.toggleHud();
 }
 
 void Engine::draw() const {
@@ -78,6 +82,11 @@ void Engine::draw() const {
     IoMod::getInstance().writeText("Oops: Collision", 500, 90);
   }
   player->draw();
+  if(hud.isDisplayed()){
+    hud.draw();
+    hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line1"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")+30);
+    hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line2"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")+5);
+  }
   viewport.draw(clock.getFps());
   SDL_RenderPresent(renderer);
 }
@@ -88,18 +97,20 @@ void Engine::checkForCollisions() {
     if ( strategies[currentStrategy]->execute(*player, **it) ) {
       SmartSprite* doa = *it;
       //player->detach(doa);
-      //delete doa;
       //it = sprites.erase(it);
+      //delete doa;
       doa->update(clock.getElapsedTicks());
-    }
-    ++it;
+    }//else{
+          ++it;
+
+
   }
 }
 
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
   player->update(ticks);
-  for(Drawable* s : sprites){
+  for(SmartSprite* s : sprites){
     s->update(ticks);
   }
 
@@ -135,6 +146,9 @@ void Engine::play() {
         if ( keystate[SDL_SCANCODE_P] ) {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
+        }
+        if ( keystate[SDL_SCANCODE_F1] ) {
+          hud.toggleHud();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;

@@ -13,6 +13,21 @@
 
 <numOfSprites>7</numOfSprites>
 
+<HudText>
+  <Line1>To Move: WASD</Line1>
+  <Line2>To Toggle Hud: F1</Line2>
+  <red>59</red>
+  <green>124</green>
+  <blue>200</blue>
+</HudText>
+
+
+<HudPlacement>
+  <x>50</x>
+  <y>175</y>
+  <w>150</w>
+  <h>200</h>
+</HudPlacement>
 
 <view>
   <width>804</width>
@@ -44,12 +59,38 @@
 
 <font name="font">
   <file>fonts/arial.ttf</file>
-  <size>24</size>
-  <red>255</red>
-  <green>0</green>
-  <blue>0</blue>
+  <size>15</size>
+  <red>4</red>
+  <green>8</green>
+  <blue>30</blue>
   <alpha>0</alpha>
 </font>
+
+<GreenBirdL>
+  <file>assets/greenbirdL.png</file>
+  <startLoc x="227" y="240"/>
+  <frames>4</frames>
+  <imageWidth>74.5</imageWidth>
+  <imageHeight>47</imageHeight>
+  <frameInterval>300</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <safeDistance>75</safeDistance>
+</GreenBirdL>
+
+<GreenBird>
+  <file>assets/greenbirdR.png</file>
+  <startLoc x="227" y="240"/>
+  <frames>4</frames>
+  <imageWidth>74.5</imageWidth>
+  <imageHeight>47</imageHeight>
+  <frameInterval>300</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <safeDistance>75</safeDistance>
+</GreenBird>
 
 <EagleL>
   <file>assets/eagleL.png</file>

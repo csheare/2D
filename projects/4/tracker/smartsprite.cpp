@@ -11,15 +11,21 @@ float distance(float x1, float y1, float x2, float y2) {
   return hypot(x, y);
 }
 
-void SmartSprite::goLeft()  { setVelocityX( -std::abs(getVelocityX()) );  }
-void SmartSprite::goRight() { setVelocityX( std::fabs(getVelocityX()) );  }
+void SmartSprite::goLeft()  {
+  TwoWaySprite::setImagesLeft();
+  setVelocityX( -std::abs(getVelocityX()) );
+}
+void SmartSprite::goRight() {
+  TwoWaySprite::setImagesRight();
+  setVelocityX( std::fabs(getVelocityX()) );
+}
 void SmartSprite::goUp()    { setVelocityY( -fabs(getVelocityY()) ); }
 void SmartSprite::goDown()  { setVelocityY( std::fabs(getVelocityY()) );  }
 
 
 SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos,
   int w, int h) :
-  Sprite(name),
+  TwoWaySprite(name),
   playerPos(pos),
   playerWidth(w),
   playerHeight(h),
@@ -29,7 +35,7 @@ SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos,
 
 
 SmartSprite::SmartSprite(const SmartSprite& s) :
-  Sprite(s),
+  TwoWaySprite(s),
   playerPos(s.playerPos),
   playerWidth(s.playerWidth),
   playerHeight(s.playerHeight),
@@ -38,7 +44,7 @@ SmartSprite::SmartSprite(const SmartSprite& s) :
 {}
 
 void SmartSprite::update(Uint32 ticks) {
-  Sprite::update(ticks);
+  TwoWaySprite::update(ticks);
   float x= getX()+getImage()->getWidth()/2;
   float y= getY()+getImage()->getHeight()/2;
   float ex= playerPos[0]+playerWidth/2;
@@ -51,14 +57,21 @@ void SmartSprite::update(Uint32 ticks) {
   else if  ( currentMode == EVADE ) {
     if(distanceToEnemy > safeDistance) {
       currentMode=NORMAL;
-      printf("Normal\n");
     }
     else {
-      printf("EVADE\n");
       if ( x < ex ) goLeft();
       if ( x > ex ) goRight();
       if ( y < ey ) goUp();
       if ( y > ey ) goDown();
     }
   }
+}
+
+Vector2f SmartSprite::makeVelocity(int vx, int vy) const {
+
+  float newvx = Gamedata::getInstance().getRandFloat(vx-50,vx+50);;
+  float newvy = Gamedata::getInstance().getRandFloat(vy-50,vy+50);;
+  newvx *= [](){ if(rand()%2) return -1; else return 1; }();
+  newvy *= [](){ if(rand()%2) return -1; else return 1; }();
+  return Vector2f(newvx, newvy);
 }

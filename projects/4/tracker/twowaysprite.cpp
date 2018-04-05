@@ -8,7 +8,7 @@ Vector2f TwoWaySprite::makeVelocity(int vx, int vy) const {
   float newvy = Gamedata::getInstance().getRandFloat(vy-50,vy+50);;
   newvx *= [](){ if(rand()%2) return -1; else return 1; }();
   newvy *= [](){ if(rand()%2) return -1; else return 1; }();
-  std::cout<<"TWOWAY" <<newvx<<" "<<newvy <<std::endl;
+  //std::cout<<"TWOWAY" <<newvx<<" "<<newvy <<std::endl;
   return Vector2f(newvx, newvy);
 }
 
@@ -79,10 +79,12 @@ void TwoWaySprite::update(Uint32 ticks) {
   }
 
   if ( getX() > worldWidth-getScaledWidth()) {//set right
+    setImagesLeft();
     setVelocityX( -fabs( getVelocityX() ) );
 
   }
   if (getX() < 0) {
+    setImagesRight();
     setVelocityX( fabs( getVelocityX() ) );
   }
 

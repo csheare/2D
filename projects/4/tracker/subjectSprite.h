@@ -20,6 +20,7 @@ public:
   void attach( SmartSprite* o ) { observers.push_back(o); }
   void detach( SmartSprite* o );
 
+
 protected:
   std::list<SmartSprite*> observers;
   SubjectSprite& operator=(const SubjectSprite&);

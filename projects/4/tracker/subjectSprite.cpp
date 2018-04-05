@@ -17,6 +17,7 @@ void SubjectSprite::detach( SmartSprite* o ) {
   std::list<SmartSprite*>::iterator ptr = observers.begin();
   while ( ptr != observers.end() ) {
     if ( *ptr == o ) {
+
       ptr = observers.erase(ptr);
       return;
     }
