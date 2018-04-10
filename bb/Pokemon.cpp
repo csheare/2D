@@ -45,26 +45,26 @@ std::ostream& operator<<(std::ostream& out, const Pokemon & p){
 
 int main(){
 
-Pokemon d;//don;t do Pokemon d()
-Pokemon c(4,"Courtney");
-Pokemon j(10,"Jeff");
-Pokemon m(j);
-c = j;//will call assignment
-Pokemon s = j;//this will call copy constructor
+//Pokemon d;//don;t do Pokemon d()
+//Pokemon c(4,"Courtney");
+//Pokemon j(10,"Jeff");
+//Pokemon m(j);
+//c = j;//will call assignment
+//Pokemon s = j;//this will call copy constructor
 
-std::cout << s << std::endl;
+//std::cout << s << std::endl;
 
 //vector testing
 std::vector<Pokemon> vec;//don't do vec(2)
-for(unsigned int i=0; i < 2; i++){
-  vec.push_back(i);
+for(unsigned int i=0; i < 4; i++){
+  //vec.emplace_back(i);
 }
 
 std::cout << "Vec 2 processing..."<< std::endl;
 
 std::vector<Pokemon> vec2;//don't do vec(2)
-vec2.reserve(2);
-for(unsigned int i=0; i < 2; i++){
+//vec2.reserve(2);
+for(unsigned int i=0; i < 4; i++){
   vec2.push_back(i);
 }
 //won't need final copy

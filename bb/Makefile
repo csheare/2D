@@ -1,8 +1,8 @@
-CC = g++
+CC = clang++
 
-CFLAGS = -g Wall
+CFLAGS = -g -std=c++11 -W -Wall -Weffc++ -Wextra -pedantic -O0
 
-BINS= init_order static_function assign leastpriv Pokemon pointandref
+BINS= init_order static_function assign leastpriv Pokemon pointandref number
 
 all: $(BINS)
 
@@ -23,6 +23,9 @@ leastpriv: leastpriv.cpp
 
 Pokemon: Pokemon.cpp
 	$(CC) -o Pokemon $^
+
+number: number.cpp
+	$(CC) $(CFLAGS) -o number $^
 
 %: %.c
 	$(CC) -o $@ $< -g

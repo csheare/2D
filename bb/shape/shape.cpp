@@ -17,7 +17,7 @@ class Circle: public Shape{
 public:
 Circle(const std::string & n,float r): Shape(n), radius(r){}
 virtual float area() const { return (3.14 * radius * radius);}
-
+float getRadius(){ return radius;}
 private:
 float radius;
 
@@ -43,5 +43,7 @@ std::vector<Shape*> shapes;
 shapes.push_back(new Circle("circle",5.0));
 printAreasF(shapes);
 printAreasW(shapes);
+Shape * s = new Circle("circle",11.0);
+std::cout<<static_cast<Circle*>(s)->getRadius()<<std::endl;
 
 }
