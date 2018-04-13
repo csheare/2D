@@ -1,0 +1,25 @@
+Name:Courtney Shearer
+
+Course: CPSC 4160
+
+Clemson Email Address: csheare
+
+Project no:4
+
+Project due date: April 6, 2018
+
+
+Project Conclusion:
+The eventual goal of this game will be to out survive the other birds. A high score will be kept track of.
+I will incorporate a health bar, which will go up when bugs are consumed, but decrease as time goes on
+without eating bugs. Additionally, there will be other "dark" eagles that try to eat the bugs and will attack
+the player within a certain range. These Eagles will also have health bars, but the player will not be able to
+see them. Some of the dark eagles may be "stronger" than others too, larger health bars. Again, the goal of the
+game is to out survive the other birds, aka the dark eagles and the other bird that don't attack but do try to
+eat bugs.
+
+Sources:
+Zion Background: https://commons.wikimedia.org/wiki/File:Franz_A._Bischoff_-_Zion_Park.jpg
+Eagle: https://dribbble.com/shots/1451359-Eagle-Sprite-Sheet
+Small bird: I made the edits for the sprite sheet, but used https://cdn.dribbble.com/users/375867/screenshots/1452976/green-bird-sprite-sheet-animation-game-assets-dribbble.jpg, https://dribbble.com/
+WindSpinner: I made this

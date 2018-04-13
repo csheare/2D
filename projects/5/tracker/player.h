@@ -6,7 +6,7 @@
 
 // In this example the player is derived from MultiSprite.
 // However, there are many options.
-class Player : public TwoWaySprite {
+class Player : public Subject {
 public:
   Player(const std::string&);
   Player(const Player&);

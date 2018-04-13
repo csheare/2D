@@ -1,0 +1,143 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation.
+     So make sure to include your name as part of the screenTitle -->
+<title>The Tracker Framework</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>300</maxFrames>
+<username>csheare</username>
+
+<numOfSprites>7</numOfSprites>
+
+<HudText>
+  <Line1>To Move: WASD</Line1>
+  <Line2>To Toggle Hud: F1</Line2>
+  <red>59</red>
+  <green>124</green>
+  <blue>200</blue>
+</HudText>
+
+
+<HudPlacement>
+  <x>50</x>
+  <y>175</y>
+  <w>150</w>
+  <h>200</h>
+</HudPlacement>
+
+<view>
+  <width>804</width>
+  <height>480</height>
+</view>
+
+<world>
+  <width>2000</width>
+  <height>600</height>
+</world>
+
+<back>
+  <file>assets/clouds.png</file>
+  <factor>3</factor>
+  <transparency>true</transparency>
+</back>
+
+<middle>
+  <file>assets/middle.png</file>
+  <factor>2</factor>
+  <transparency>true</transparency>
+</middle>
+<front>
+  <file>assets/front.png</file>
+  <factor>1</factor>
+  <transparency>true</transparency>
+</front>
+
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>15</size>
+  <red>4</red>
+  <green>8</green>
+  <blue>30</blue>
+  <alpha>0</alpha>
+</font>
+
+<GreenBirdL>
+  <file>assets/greenbirdL.png</file>
+  <startLoc x="227" y="240"/>
+  <frames>4</frames>
+  <imageWidth>74.5</imageWidth>
+  <imageHeight>47</imageHeight>
+  <frameInterval>300</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <safeDistance>75</safeDistance>
+</GreenBirdL>
+
+<GreenBird>
+  <file>assets/greenbirdR.png</file>
+  <startLoc x="227" y="240"/>
+  <frames>4</frames>
+  <imageWidth>74.5</imageWidth>
+  <imageHeight>47</imageHeight>
+  <frameInterval>300</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <safeDistance>75</safeDistance>
+</GreenBird>
+
+<EagleL>
+  <file>assets/eagleL.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>119</imageWidth>
+  <imageHeight>65</imageHeight>
+  <frameInterval>300</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+</EagleL>
+
+<Eagle>
+    <file>assets/eagleR.png</file>
+    <startLoc x="50" y="140"/>
+    <frames>4</frames>
+    <imageWidth>119</imageWidth>
+    <imageHeight>65</imageHeight>
+    <frameInterval>300</frameInterval>
+    <speedX>200</speedX>
+    <speedY>200</speedY>
+    <transparency>false</transparency>
+</Eagle>
+
+
+<WindSpinner>
+  <file>assets/windspinner5.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>32</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>3</frameInterval>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
+  <transparency>false</transparency>
+</WindSpinner>
+
+<Boulder>
+  <file>assets/boulder.png</file>
+  <startLoc x="227" y="240"/>
+  <imageWidth>27</imageWidth>
+  <imageHeight>27</imageHeight>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <safeDistance>75</safeDistance>
+  <transparency>false</transparency>
+</Boulder>
+
+</GameData>

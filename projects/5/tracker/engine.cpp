@@ -4,15 +4,17 @@
 #include <string>
 #include <random>
 #include <iomanip>
+
 #include "sprite.h"
 #include "multisprite.h"
 #include "twowaysprite.h"
 #include "smartsprite.h"
-#include "gamedata.h"
-#include "engine.h"
-#include "frameGenerator.h"
 #include "player.h"
 #include "subjectSprite.h"
+
+#include "engine.h"
+
+
 
 Engine::~Engine() {
   delete player;

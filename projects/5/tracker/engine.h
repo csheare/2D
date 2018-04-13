@@ -8,6 +8,8 @@
 #include "collisionStrategy.h"
 #include "subjectSprite.h"
 #include "hud.h"
+#include "gamedata.h"
+#include "frameGenerator.h"
 
 class Engine {
 public:
