@@ -1,15 +1,16 @@
 #ifndef PLAYER__H
 #define PLAYER__H
 
-#include "twowaysprite.h"
+#include "drawable.h"
+#include "subject.h"
 
 
 // In this example the player is derived from MultiSprite.
 // However, there are many options.
 class Player : public Subject {
 public:
-  Player(const std::string&);
-  Player(const Player&);
+  Player();
+  Player(const Player& s);
   virtual void update(Uint32 ticks);
 
   void collided() { collision = true; }

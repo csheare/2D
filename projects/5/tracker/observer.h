@@ -4,8 +4,7 @@
 
 class Observer{
 public:
-  Observer(const std::string&, const Vector2f& pos, int w, int h);
-  Observer(const Observer&);
+  Observer(const Vector2f& pos, int w, int h);
   virtual ~Observer() { }
 
   void update(Uint32 ticks);

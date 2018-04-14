@@ -65,6 +65,16 @@ void TwoWaySprite::draw() const {
   images[currentFrame]->draw(getX(), getY(), getScale());
 }
 
+void TwoWaySprite::setVelocityX(float vx){
+  if ( getX() > worldWidth-getScaledWidth()) {
+    setImagesLeft();
+  }
+  if (getX() < 0) {
+    setImagesRight();
+  }
+  Drawable::setVelocityX(vx);
+}
+
 void TwoWaySprite::update(Uint32 ticks) {
   advanceFrame(ticks);
   Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
@@ -79,13 +89,12 @@ void TwoWaySprite::update(Uint32 ticks) {
   }
 
   if ( getX() > worldWidth-getScaledWidth()) {//set right
-    setImagesLeft();
     setVelocityX( -fabs( getVelocityX() ) );
-
   }
   if (getX() < 0) {
-    setImagesRight();
     setVelocityX( fabs( getVelocityX() ) );
   }
 
 }
+int TwoWaySprite::getWorldWidth() const {return worldWidth;}
+int TwoWaySprite::getWorldHeight()  const{return worldHeight;}

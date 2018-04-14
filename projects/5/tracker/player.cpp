@@ -1,13 +1,12 @@
 #include "player.h"
 
-Player::Player( const std::string& name) :
-  TwoWaySprite(name),
+
+Player::Player() :
   collision(false),
   initialVelocity(getVelocity())
 { }
 
 Player::Player(const Player& s) :
-  TwoWaySprite(s),
   collision(s.collision),
   initialVelocity(s.getVelocity())
   { }

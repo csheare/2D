@@ -12,7 +12,7 @@ public:
 
   virtual void update(Uint32 ticks);
   void attach( Observer* o ) { observers.push_back(o); }
-  void detach( Obse* o );
+  void detach( Observer* o );
   //need alert function
 
 

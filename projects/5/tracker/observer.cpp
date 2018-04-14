@@ -11,21 +11,14 @@ float distance(float x1, float y1, float x2, float y2) {
   return hypot(x, y);
 }
 
-void Observer::goLeft()  {
-  TwoWaySprite::setImagesLeft();
-  setVelocityX( -std::abs(getVelocityX()) );
-}
-void Observer::goRight() {
-  TwoWaySprite::setImagesRight();
-  setVelocityX( std::fabs(getVelocityX()) );
-}
+void Observer::goLeft()  {setVelocityX( -std::abs(getVelocityX()) );}
+void Observer::goRight() {setVelocityX( std::fabs(getVelocityX()) );}
 void Observer::goUp()    { setVelocityY( -fabs(getVelocityY()) ); }
 void Observer::goDown()  { setVelocityY( std::fabs(getVelocityY()) );  }
 
 
-Observer::Observer(const std::string& name, const Vector2f& pos,
+Observer::Observer(const Vector2f& pos,
   int w, int h) :
-  TwoWaySprite(name),
   playerPos(pos),
   playerWidth(w),
   playerHeight(h),
@@ -33,18 +26,7 @@ Observer::Observer(const std::string& name, const Vector2f& pos,
   safeDistance(Gamedata::getInstance().getXmlFloat(name+"/safeDistance"))
 {}
 
-
-Observer::Observer(const Observer& s) :
-  TwoWaySprite(s),
-  playerPos(s.playerPos),
-  playerWidth(s.playerWidth),
-  playerHeight(s.playerHeight),
-  currentMode(s.currentMode),
-  safeDistance(s.safeDistance)
-{}
-
 void Observer::update(Uint32 ticks) {
-  TwoWaySprite::update(ticks);
   float x= getX()+getImage()->getWidth()/2;
   float y= getY()+getImage()->getHeight()/2;
   float ex= playerPos[0]+playerWidth/2;

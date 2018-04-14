@@ -45,9 +45,12 @@ public:
   void  setPosition(const Vector2f& pos) { position = pos;  }
 
   float getVelocityX() const   { return velocity[0]; }
-  void  setVelocityX(float vx) { velocity[0] = vx;   }
+  virtual void setVelocityX(float vx) { velocity[0] = vx;   }
   float getVelocityY() const   { return velocity[1]; }
   void  setVelocityY(float vy) { velocity[1] = vy;   }
+
+  virtual int getWorldWidth() const = 0;
+  virtual int getWorldHeight() const = 0;
 private:
   std::string name;
   Vector2f position;

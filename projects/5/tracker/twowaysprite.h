@@ -4,6 +4,7 @@
 #include <vector>
 #include <cmath>
 #include "multisprite.h"
+#include "drawable.h"
 
 class TwoWaySprite : public MultiSprite {
 public:
@@ -31,6 +32,10 @@ public:
   virtual const SDL_Surface* getSurface() const {
     return images[currentFrame]->getSurface();
   }
+  virtual void setVelocityX(float vx);
+
+  virtual int getWorldWidth() const;
+  virtual int getWorldHeight() const;
 
 protected:
   std::vector<Image*> images;

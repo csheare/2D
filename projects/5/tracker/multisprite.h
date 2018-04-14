@@ -12,6 +12,7 @@ public:
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
+  virtual void setVelocityX(float vx);
 
   virtual const Image* getImage() const {
     return images[currentFrame];
@@ -25,6 +26,8 @@ public:
   virtual const SDL_Surface* getSurface() const {
     return images[currentFrame]->getSurface();
   }
+  virtual int getWorldWidth() const;
+  virtual int getWorldHeight() const;
 
 protected:
   std::vector<Image *> images;
