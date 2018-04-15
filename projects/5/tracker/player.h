@@ -1,15 +1,12 @@
 #ifndef PLAYER__H
 #define PLAYER__H
 
-#include "drawable.h"
+#include "twowaysprite.h"
 #include "subject.h"
 
-
-// In this example the player is derived from MultiSprite.
-// However, there are many options.
-class Player : public Subject, public Drawable {
+class Player : public Subject, public TwoWaySprite{
 public:
-  Player();
+  Player(const std::string& n);
   Player(const Player& s);
   virtual void update(Uint32 ticks);
 

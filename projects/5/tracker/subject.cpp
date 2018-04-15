@@ -1,13 +1,17 @@
-#include "Subject.h"
-#include "Observer.h"
+#include "subject.h"
+#include "observer.h"
 #include "gamedata.h"
 #include "renderContext.h"
 
-Subject::Subject():
-  observers()
+Subject::Subject(Drawable *s):
+  observers(),
+  drawable(s)
 { }
 
-
+Subject::Subject(const Subject& s) :
+  observers( s.observers ),
+  drawable(s.drawable)
+  { }
 
 void Subject::detach( Observer* o ) {
   std::list<Observer*>::iterator ptr = observers.begin();
@@ -24,7 +28,10 @@ void Subject::detach( Observer* o ) {
 void Subject::update(Uint32 ticks) {
   std::list<Observer*>::iterator ptr = observers.begin();
   while ( ptr != observers.end() ) {
-    (*ptr)->setPlayerPos( getPosition() );
+    (*ptr)->setPlayerPos( getDrawable()->getPosition() );
     ++ptr;
   }
+}
+Drawable* Subject::getDrawable(){
+  return drawable;
 }

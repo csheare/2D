@@ -6,10 +6,11 @@
 #include "viewport.h"
 #include "clock.h"
 #include "collisionStrategy.h"
-#include "subjectSprite.h"
+#include "subject.h"
 #include "hud.h"
 #include "gamedata.h"
 #include "frameGenerator.h"
+#include "player.h"
 
 class Engine {
 public:
@@ -30,10 +31,9 @@ private:
   World middle;
   World back;
   Viewport& viewport;
-  std::vector<SmartSprite*> sprites;
-  //std::vector<Drawable*> sprites;
+  std::vector<Drawable*> sprites;
   int numOfSprites;
-  SubjectSprite * player;
+  Player * player;
   std::vector<CollisionStrategy*> strategies;
   int currentStrategy;
   bool collision;

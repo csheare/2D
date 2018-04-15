@@ -1,18 +1,23 @@
 #include "player.h"
 
+//Player Factory Class
 
-Player::Player() :
+Player::Player(const std::string& name) :
+  Subject(this),
+  TwoWaySprite(name),
   collision(false),
   initialVelocity(getVelocity())
 { }
 
 Player::Player(const Player& s) :
+  Subject(s),
+  TwoWaySprite(s),
   collision(s.collision),
   initialVelocity(s.getVelocity())
   { }
 
 Player& Player::operator=(const Player& s) {
-  Subject::operator=(s);
+  TwoWaySprite::operator=(s);
   collision = s.collision;
   initialVelocity = s.initialVelocity;
   return *this;
@@ -46,6 +51,6 @@ void Player::down()  {
 }
 
 void Player::update(Uint32 ticks) {
-  if ( !collision ) Subject::update(ticks);
+  if ( !collision ) TwoWaySprite::update(ticks);
   stop();
 }

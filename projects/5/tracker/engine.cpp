@@ -8,9 +8,9 @@
 #include "sprite.h"
 #include "multisprite.h"
 #include "twowaysprite.h"
-#include "smartsprite.h"
+#include "observer.h"
 #include "player.h"
-#include "subjectSprite.h"
+#include "subject.h"
 
 #include "engine.h"
 
@@ -39,24 +39,26 @@ Engine::Engine() :
   viewport( Viewport::getInstance()),
   sprites(),
   numOfSprites(Gamedata::getInstance().getXmlInt("numOfSprites")),
-  player(new SubjectSprite("Eagle")),
+  player(new Player("Eagle")),
   strategies(),
   currentStrategy(0),
   collision(false),
   makeVideo(false)
 {
   sprites.reserve(numOfSprites);
+
   Vector2f pos = player->getPosition();
   int w = player->getScaledWidth();
   int h = player->getScaledHeight();
+
   for(int i=0;i<numOfSprites;i++){
-    //std::cout << "Adding Sprite!" <<std::endl;
-    sprites.push_back(new SmartSprite("GreenBird",pos, w, h));
-    sprites[i]->setVelocity(sprites[i]->makeVelocity(sprites[i]->getVelocityX(), sprites[i]->getVelocityY()));
-    player->attach( sprites[i] );
-  hud.draw();
-  hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line1"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")-30);
-  hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line2"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")-5);
+    sprites.push_back(new Observer(new TwoWaySprite("GreenBird"),pos, w, h));
+    sprites[i]->setVelocity(static_cast<Observer*>(sprites[i])->makeVelocity(sprites[i]->getVelocityX(), sprites[i]->getVelocityY()));
+    player->attach(static_cast<Observer*>(sprites[i]));
+
+    hud.draw();
+    hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line1"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")-30);
+    hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line2"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")-5);
   }
 
   strategies.push_back( new RectangularCollisionStrategy );
@@ -97,7 +99,7 @@ void Engine::checkForCollisions() {
   auto it = sprites.begin();
   while ( it != sprites.end() ) {
     if ( strategies[currentStrategy]->execute(*player, **it) ) {
-      SmartSprite* doa = *it;
+      Observer* doa = static_cast<Observer*>(*it);
       //player->detach(doa);
       //it = sprites.erase(it);
       //delete doa;
@@ -112,7 +114,7 @@ void Engine::checkForCollisions() {
 void Engine::update(Uint32 ticks) {
   checkForCollisions();
   player->update(ticks);
-  for(SmartSprite* s : sprites){
+  for(Drawable* s : sprites){
     s->update(ticks);
   }
 
