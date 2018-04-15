@@ -12,7 +12,7 @@ Player::Player(const Player& s) :
   { }
 
 Player& Player::operator=(const Player& s) {
-  TwoWaySprite::operator=(s);
+  Subject::operator=(s);
   collision = s.collision;
   initialVelocity = s.initialVelocity;
   return *this;
@@ -25,14 +25,12 @@ void Player::stop() {
 
 
 void Player::right() {
-  if ( getX()  < worldWidth-getScaledWidth() ) {
-    TwoWaySprite::setImagesRight();
+  if ( getX()  < getWorldWidth()-getScaledWidth() ) {
     setVelocityX(initialVelocity[0]);
   }
 }
 void Player::left()  {
   if ( getX() > 0) {
-    TwoWaySprite::setImagesLeft();
      setVelocityX(-initialVelocity[0]);
   }
 }
@@ -42,12 +40,12 @@ void Player::up()    {
   }
 }
 void Player::down()  {
-  if ( getY() < worldHeight-getScaledHeight()) {
+  if ( getY() < getWorldHeight()-getScaledHeight()) {
     setVelocityY( initialVelocity[1] );
   }
 }
 
 void Player::update(Uint32 ticks) {
-  if ( !collision ) TwoWaySprite::update(ticks);
+  if ( !collision ) Subject::update(ticks);
   stop();
 }

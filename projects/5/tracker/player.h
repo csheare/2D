@@ -7,7 +7,7 @@
 
 // In this example the player is derived from MultiSprite.
 // However, there are many options.
-class Player : public Subject {
+class Player : public Subject, public Drawable {
 public:
   Player();
   Player(const Player& s);

@@ -7,6 +7,8 @@ Subject::Subject():
   observers()
 { }
 
+
+
 void Subject::detach( Observer* o ) {
   std::list<Observer*>::iterator ptr = observers.begin();
   while ( ptr != observers.end() ) {
@@ -20,7 +22,6 @@ void Subject::detach( Observer* o ) {
 }
 
 void Subject::update(Uint32 ticks) {
-  Player::update(ticks);
   std::list<Observer*>::iterator ptr = observers.begin();
   while ( ptr != observers.end() ) {
     (*ptr)->setPlayerPos( getPosition() );
