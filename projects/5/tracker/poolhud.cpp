@@ -1,10 +1,28 @@
-#include"hud.h"
+#include <sstream>
+#include "poolhud.h"
 #include "gamedata.h"
-#include "renderContext.h"
-#include "ioMod.h"
 
-void Hud::draw()const{
-  if(!showHud) return;
+PoolHud::PoolHud(const Player& p):
+  player(p),
+  renderer(RenderContext::getInstance()->getRenderer()),
+  hudFrame({
+            Gamedata::getInstance().getXmlInt("PoolHudPlacement/loc/x"),
+            Gamedata::getInstance().getXmlInt("PoolHudPlacement/loc/y"),
+            Gamedata::getInstance().getXmlInt("PoolHudPlacement/width"),
+            Gamedata::getInstance().getXmlInt("PoolHudPlacement/height")
+            }
+  ),
+  showPoolHud(true),
+  io(IoMod::getInstance())
+{}
+
+
+void PoolHud::update(){
+
+}
+
+void PoolHud::draw() const {
+  if(!showPoolHud) return;
 
   // First set the blend mode so that alpha blending will work;
   // the default blend mode is SDL_BLENDMODE_NONE!
@@ -17,12 +35,12 @@ void Hud::draw()const{
   SDL_RenderFillRect( renderer, &hudFrame );
 
   std::stringstream strm;
-  strm << "Tracking Eagle: ";
+  strm << "Bullet list: " << player.bulletCount();
   io.writeText(strm.str(), hudFrame.x+20,22);
 
   strm.clear();//clear error flags
   strm.str(""); //clear content
-  strm << "Move Player: ASWD";
+  strm << "Free List: " << player.freeCount();
   io.writeText(strm.str(), hudFrame.x+20,50);
 
   // Now set the color for the outline of the hud:
@@ -32,26 +50,5 @@ void Hud::draw()const{
     Gamedata::getInstance().getXmlInt("HudInfo/blue"),
     255/2 );
   SDL_RenderDrawRect( renderer, &hudFrame );
-}
-
-void Hud::update(){
 
 }
-
-Hud& Hud::getInstance() {
-  static Hud instance;
-  return instance;
-}
-
-
-Hud::Hud() :
-  showHud(true),
-  renderer( RenderContext::getInstance()->getRenderer()),
-  hudFrame({Gamedata::getInstance().getXmlInt("HudPlacement/loc/x"),
-            Gamedata::getInstance().getXmlInt("HudPlacement/loc/y"),
-            Gamedata::getInstance().getXmlInt("HudPlacement/width"),
-            Gamedata::getInstance().getXmlInt("HudPlacement/height")
-            }
-  ),
-  io(IoMod::getInstance())
-{}

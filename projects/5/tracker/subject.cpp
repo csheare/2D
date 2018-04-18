@@ -1,23 +1,25 @@
 #include "subject.h"
 #include "observer.h"
 #include "gamedata.h"
-#include "renderContext.h"
+#include "twowaysprite.h"
 
-Subject::Subject(Drawable *s):
-  observers(),
-  drawable(s)
+
+
+Subject::Subject(const std::string& name):
+  Player(name),
+  observers()
 { }
 
 Subject::Subject(const Subject& s) :
-  observers( s.observers ),
-  drawable(s.drawable)
+  Player(s),
+  observers( s.observers )
   { }
 
+
 void Subject::detach( Observer* o ) {
-  std::list<Observer*>::iterator ptr = observers.begin();
+  auto ptr = observers.begin();
   while ( ptr != observers.end() ) {
     if ( *ptr == o ) {
-
       ptr = observers.erase(ptr);
       return;
     }
@@ -26,12 +28,10 @@ void Subject::detach( Observer* o ) {
 }
 
 void Subject::update(Uint32 ticks) {
-  std::list<Observer*>::iterator ptr = observers.begin();
+  Player::update(ticks);
+  auto ptr = observers.begin();
   while ( ptr != observers.end() ) {
-    (*ptr)->setPlayerPos( getDrawable()->getPosition() );
+    (*ptr)->setPlayerPos( getPosition() );
     ++ptr;
   }
-}
-Drawable* Subject::getDrawable(){
-  return drawable;
 }

@@ -19,8 +19,11 @@ OBJS = \
 	sprite.o \
 	multisprite.o \
 	twowaysprite.o \
-	observer.o\
 	collisionStrategy.o\
+	bullets.o\
+	bullet.o\
+	poolhud.o\
+	observer.o\
 	subject.o\
 	player.o \
 	vector2f.o \

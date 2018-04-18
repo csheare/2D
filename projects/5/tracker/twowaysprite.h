@@ -17,12 +17,9 @@ public:
   virtual const Image* getImage() const {
     return images[currentFrame];
   }
-  void setImagesRight(){
-    images = imagesRight;
-  }
-  void setImagesLeft(){
-    images = imagesLeft;
-  }
+  void setImagesRight();
+  void setImagesLeft();
+
   int getScaledWidth()  const {
     return getScale()*images[currentFrame]->getWidth();
   }
@@ -32,10 +29,35 @@ public:
   virtual const SDL_Surface* getSurface() const {
     return images[currentFrame]->getSurface();
   }
-  virtual void setVelocityX(float vx);
 
-  virtual int getWorldWidth() const;
-  virtual int getWorldHeight() const;
+  virtual int getWorldWidth() const {return worldWidth;}
+  virtual int getWorldHeight()  const{return worldHeight;}
+
+  // float getMinFrameDelay() const{ return minFrameDelay;}
+  // void setMinFrameDelay(float x){ minFrameDelay = x; }
+  //
+  // float getFrameDelay() const{return frameDelay;}
+  // void setFrameDelay(float x){frameDelay = x;}
+  //
+  // unsigned getFrameSpeed() const{ return frameSpeed;}
+  // void setFrameSpeed(unsigned x){ FrameSpeed = x; }
+
+  unsigned getCurrentFrame() const{ return currentFrame;}
+  void setCurrentFrame(unsigned x){ currentFrame = x;}
+
+  unsigned getNumberOfFrames() const { return numberOfFrames;}
+  void setNumberOfFrames(unsigned x){ numberOfFrames = x;}
+
+  unsigned getFrameInterval() const { return frameInterval;}
+  void setFrameInterval(unsigned x){ frameInterval = x;}
+
+  float getTimeSinceLastFrame() const { return timeSinceLastFrame;}
+  void setTimeSinceLastFrame(float x){ timeSinceLastFrame =x;}
+
+
+
+
+
 
 protected:
   std::vector<Image*> images;
@@ -49,7 +71,7 @@ protected:
   int worldWidth;
   int worldHeight;
 
-  void advanceFrame(Uint32 ticks);
+  virtual void advanceFrame(Uint32 ticks);
   TwoWaySprite& operator=(const TwoWaySprite&);
   Vector2f makeVelocity(int, int) const;
 };

@@ -8,7 +8,6 @@ Vector2f TwoWaySprite::makeVelocity(int vx, int vy) const {
   float newvy = Gamedata::getInstance().getRandFloat(vy-50,vy+50);;
   newvx *= [](){ if(rand()%2) return -1; else return 1; }();
   newvy *= [](){ if(rand()%2) return -1; else return 1; }();
-  //std::cout<<"TWOWAY" <<newvx<<" "<<newvy <<std::endl;
   return Vector2f(newvx, newvy);
 }
 
@@ -64,16 +63,13 @@ TwoWaySprite& TwoWaySprite::operator=(const TwoWaySprite& s) {
 void TwoWaySprite::draw() const {
   images[currentFrame]->draw(getX(), getY(), getScale());
 }
-
-void TwoWaySprite::setVelocityX(float vx){
-  if ( getX() > worldWidth-getScaledWidth()) {
-    setImagesLeft();
-  }
-  if (getX() < 0) {
-    setImagesRight();
-  }
-  Drawable::setVelocityX(vx);
+void TwoWaySprite::setImagesRight(){
+  images = imagesRight;
 }
+void TwoWaySprite::setImagesLeft(){
+  images = imagesLeft;
+}
+
 
 void TwoWaySprite::update(Uint32 ticks) {
   advanceFrame(ticks);
@@ -84,17 +80,17 @@ void TwoWaySprite::update(Uint32 ticks) {
     setVelocityY( fabs( getVelocityY() ) );
   }
 
-  if ( getY() > worldHeight-getScaledHeight()) {
+  if ( getY() > getWorldHeight()-getScaledHeight()) {
     setVelocityY( -fabs( getVelocityY() ) );
   }
 
-  if ( getX() > worldWidth-getScaledWidth()) {//set right
-    setVelocityX( -fabs( getVelocityX() ) );
+  if ( getX() > getWorldWidth()-getScaledWidth()) {
+    TwoWaySprite::setVelocityX( -fabs( getVelocityX() ) );
+    setImagesLeft();
   }
   if (getX() < 0) {
-    setVelocityX( fabs( getVelocityX() ) );
+    TwoWaySprite::setVelocityX( fabs( getVelocityX() ) );
+    setImagesRight();
   }
 
 }
-int TwoWaySprite::getWorldWidth() const {return worldWidth;}
-int TwoWaySprite::getWorldHeight()  const{return worldHeight;}

@@ -78,5 +78,3 @@ void Sprite::update(Uint32 ticks) {
     setVelocityX( -std::abs( getVelocityX() ) );
   }
 }
-int Sprite::getWorldWidth() const {return worldWidth;}
-int Sprite::getWorldHeight() const {return worldHeight;}

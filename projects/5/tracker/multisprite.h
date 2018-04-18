@@ -12,7 +12,7 @@ public:
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
-  virtual void setVelocityX(float vx);
+  virtual void setVelocityX(float vx) { Drawable::setVelocityX(vx); }
 
   virtual const Image* getImage() const {
     return images[currentFrame];

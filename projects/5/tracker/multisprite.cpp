@@ -78,4 +78,3 @@ void MultiSprite::update(Uint32 ticks) {
 }
 int MultiSprite::getWorldWidth()const{return worldWidth;}
 int MultiSprite::getWorldHeight()const{return worldHeight;}
-void setVelocityX(float vx){}

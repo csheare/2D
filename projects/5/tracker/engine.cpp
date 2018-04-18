@@ -9,12 +9,9 @@
 #include "multisprite.h"
 #include "twowaysprite.h"
 #include "observer.h"
-#include "player.h"
-#include "subject.h"
+
 
 #include "engine.h"
-
-
 
 Engine::~Engine() {
   delete player;
@@ -39,7 +36,8 @@ Engine::Engine() :
   viewport( Viewport::getInstance()),
   sprites(),
   numOfSprites(Gamedata::getInstance().getXmlInt("numOfSprites")),
-  player(new Player("Eagle")),
+  player(new Subject("Eagle")),
+  poolHud(*(dynamic_cast<Player*>(player))),
   strategies(),
   currentStrategy(0),
   collision(false),
@@ -52,13 +50,11 @@ Engine::Engine() :
   int h = player->getScaledHeight();
 
   for(int i=0;i<numOfSprites;i++){
-    sprites.push_back(new Observer(new TwoWaySprite("GreenBird"),pos, w, h));
-    sprites[i]->setVelocity(static_cast<Observer*>(sprites[i])->makeVelocity(sprites[i]->getVelocityX(), sprites[i]->getVelocityY()));
-    player->attach(static_cast<Observer*>(sprites[i]));
+      sprites.push_back(new Observer("GreenBird",pos, w, h));
+      sprites[i]->setVelocity(static_cast<Observer*>(sprites[i])->makeVelocity(sprites[i]->getVelocityX(), sprites[i]->getVelocityY()));
+      //std::cout << "Sprite Velocity (x,y): " << sprites[i]->getVelocityX() << " , " << sprites[i]->getVelocityY() <<std::endl;
 
-    hud.draw();
-    hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line1"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")-30);
-    hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line2"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")-5);
+      player->attach(static_cast<Observer*>(sprites[i]));
   }
 
   strategies.push_back( new RectangularCollisionStrategy );
@@ -67,38 +63,28 @@ Engine::Engine() :
 
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
-  hud.toggleHud();
 }
 
 void Engine::draw() const {
   back.draw();
   middle.draw();
   front.draw();
-  IoMod::getInstance().writeText("Press m to change strategy", 500, 60);
-  for(const Drawable* sprite : sprites){
-    sprite->draw();
+  hud.draw();
+  poolHud.draw();
+  for(Drawable* sprite : sprites){
+    static_cast<Observer*>(sprite)->draw();
   }
-  std::stringstream strm;
-  strm << sprites.size() << " Smart Sprites Remaining";
-  IoMod::getInstance().writeText(strm.str(), 30, 60);
-  strategies[currentStrategy]->draw();
-  if ( collision ) {
-    IoMod::getInstance().writeText("Oops: Collision", 500, 90);
-  }
+
+  //strategies[currentStrategy]->draw();
   player->draw();
-  if(hud.isDisplayed()){
-    hud.draw();
-    hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line1"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")+30);
-    hud.writeText(Gamedata::getInstance().getXmlStr("HudText/Line2"),Gamedata::getInstance().getXmlInt("HudPlacement/x"),Gamedata::getInstance().getXmlInt("HudPlacement/y")+5);
-  }
-  viewport.draw(clock.getFps());
+  //viewport.draw(clock.getFps());
   SDL_RenderPresent(renderer);
 }
 
 void Engine::checkForCollisions() {
   auto it = sprites.begin();
   while ( it != sprites.end() ) {
-    if ( strategies[currentStrategy]->execute(*player, **it) ) {
+    if ( strategies[currentStrategy]->execute(*player, **it ) ){
       Observer* doa = static_cast<Observer*>(*it);
       //player->detach(doa);
       //it = sprites.erase(it);
@@ -115,13 +101,14 @@ void Engine::update(Uint32 ticks) {
   checkForCollisions();
   player->update(ticks);
   for(Drawable* s : sprites){
-    s->update(ticks);
+    static_cast<Observer*>(s)->update(ticks);
   }
 
   back.update();
   middle.update();
   front.update();
   viewport.update(); // always update viewport last1
+  //i never updated the hud
 
 }
 
@@ -152,7 +139,10 @@ void Engine::play() {
           else clock.pause();
         }
         if ( keystate[SDL_SCANCODE_F1] ) {
-          hud.toggleHud();
+          hud.toggle();
+        }
+        if(keystate[SDL_SCANCODE_I]){
+            player->shoot();
         }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;

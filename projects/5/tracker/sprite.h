@@ -21,8 +21,8 @@ public:
   }
   int getScaledWidth()  const { return getScale()*image->getWidth();  }
   int getScaledHeight() const { return getScale()*image->getHeight(); }
-  virtual int getWorldWidth() const;
-  virtual int getWorldHeight ()const;
+  virtual int getWorldWidth() const {return worldWidth;}
+  virtual int getWorldHeight() const {return worldHeight;}
 
 private:
   const Image * image;

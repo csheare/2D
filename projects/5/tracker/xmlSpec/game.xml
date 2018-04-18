@@ -12,22 +12,36 @@
 <username>csheare</username>
 
 <numOfSprites>7</numOfSprites>
+<numOfBullets>20</numOfBullets>
 
-<HudText>
+<HudInfo>
   <Line1>To Move: WASD</Line1>
   <Line2>To Toggle Hud: F1</Line2>
   <red>59</red>
   <green>124</green>
   <blue>200</blue>
-</HudText>
+</HudInfo>
 
+<!--This can be "PerPixel", "Recgatngular", or "MidPoint" -->
+<collisionStrategy>"Rectangular"</collisionStrategy>
 
 <HudPlacement>
-  <x>50</x>
-  <y>175</y>
-  <w>150</w>
-  <h>200</h>
+  <loc>
+    <x>50</x>
+    <y>175</y>
+  </loc>
+  <width>150</width>
+  <height>200</height>
 </HudPlacement>
+
+<PoolHudPlacement>
+  <loc>
+    <x>400</x>
+    <y>10</y>
+  </loc>
+  <width>20</width>
+  <height>20</height>
+</PoolHudPlacement>
 
 <view>
   <width>804</width>
@@ -99,9 +113,12 @@
   <imageWidth>119</imageWidth>
   <imageHeight>65</imageHeight>
   <frameInterval>300</frameInterval>
+  <minFrameDelay>20</minFrameDelay>
+  <frameSpeed>200</frameSpeed>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
+  <bulletName>Boulder</bulletName>
 </EagleL>
 
 <Eagle>
@@ -111,9 +128,12 @@
     <imageWidth>119</imageWidth>
     <imageHeight>65</imageHeight>
     <frameInterval>300</frameInterval>
+    <minFrameDelay>20</minFrameDelay>
+    <frameSpeed>200</frameSpeed>
     <speedX>200</speedX>
     <speedY>200</speedY>
     <transparency>false</transparency>
+    <bulletName>Boulder</bulletName>
 </Eagle>
 
 
@@ -134,10 +154,14 @@
   <startLoc x="227" y="240"/>
   <imageWidth>27</imageWidth>
   <imageHeight>27</imageHeight>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
+  <speedX>400</speedX>
+  <speedY>400</speedY>
+  <frames>1</frames>
+  <distance>500</distance>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
+  <frameSpeed>200</frameSpeed>
+  <minSpeed>400</minSpeed>
 </Boulder>
 
 </GameData>

@@ -1,16 +1,17 @@
 #include <vector>
 #include <SDL.h>
-#include "ioMod.h"
-#include "renderContext.h"
 #include "world.h"
 #include "viewport.h"
 #include "clock.h"
 #include "collisionStrategy.h"
 #include "subject.h"
 #include "hud.h"
+#include "poolhud.h"
 #include "gamedata.h"
 #include "frameGenerator.h"
 #include "player.h"
+#include "observer.h"
+
 
 class Engine {
 public:
@@ -31,9 +32,12 @@ private:
   World middle;
   World back;
   Viewport& viewport;
+
   std::vector<Drawable*> sprites;
+
   int numOfSprites;
-  Player * player;
+  Subject* player;
+  PoolHud poolHud;
   std::vector<CollisionStrategy*> strategies;
   int currentStrategy;
   bool collision;

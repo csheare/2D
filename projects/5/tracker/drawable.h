@@ -8,7 +8,7 @@
 
 // Drawable is an Abstract Base Class (ABC) that specifies the methods
 // that derived classes may or must have.
-class Drawable {
+class Drawable{
 public:
   Drawable(const std::string& n, const Vector2f& pos, const Vector2f& vel):
     name(n), position(pos), velocity(vel), scale(1.0) {}
