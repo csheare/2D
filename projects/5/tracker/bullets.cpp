@@ -9,6 +9,34 @@
 Bullets::~Bullets(){
 }
 
+Bullets& Bullets::operator=(const Bullets& rhs){
+  if(this == &rhs) return *this;
+  this->name = rhs.name;
+  this->myVelocity = rhs.myVelocity;
+  this->BulletImages = rhs.BulletImages;
+  this->freeList = rhs.freeList;
+  this->BulletList = rhs.BulletList;
+  delete this->strategy;
+
+
+  CollisionStrategy* pp = dynamic_cast<PerPixelCollisionStrategy*>(rhs.strategy);
+  if(pp){
+    this->strategy = new PerPixelCollisionStrategy();
+  }
+
+  CollisionStrategy* r = dynamic_cast<RectangularCollisionStrategy*>(rhs.strategy);
+  if(r){
+    this->strategy = new RectangularCollisionStrategy();
+  }
+
+  CollisionStrategy* mp = dynamic_cast<MidPointCollisionStrategy*>(rhs.strategy);
+  if(mp){
+    this->strategy = new MidPointCollisionStrategy();;
+  }
+
+  return *this;
+}
+
 Bullets::Bullets(const std::string&n):
   name(n),
   myVelocity(
@@ -30,6 +58,7 @@ Bullets::Bullets(const std::string&n):
     }
 
 }
+
 Bullets::Bullets(const Bullets &b):
   name(b.name),
   myVelocity(b.myVelocity),

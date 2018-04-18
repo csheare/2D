@@ -12,7 +12,7 @@ public:
   virtual void update(Uint32 ticks);
   bool goneTooFar() const{ return tooFar;}
   void reset();
-  Bullet& operator=(const Bullet&) =delete;
+  //Bullet& operator=(const Bullet&);
 
 private:
   float distance;

@@ -14,6 +14,7 @@ public:
   Bullets(const std::string&);
   Bullets(const Bullets &);
   ~Bullets();
+  Bullets& operator=(const Bullets&);
 
   void draw() const;
   void update(Uint32 ticks);
