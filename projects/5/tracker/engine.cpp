@@ -93,13 +93,14 @@ void Engine::checkForCollisions() {
     if ( player->getBullets().collided(*it)){//trategies[currentStrategy]->execute(*player, **it ) ){
       std::cout << "REMOVING SPRITE\n" << std::endl;
       Observer* doa = static_cast<Observer*>(*it);
-      player->detach(doa);
-      it = sprites.erase(it);
-      delete doa;
+      doa->explode();
+      //player->detach(doa);
+      //it = sprites.erase(it);
+      //delete doa;
       //doa->update(clock.getElapsedTicks());
-    }else{
-          ++it;
     }
+          ++it;
+
   }
 }
 
@@ -152,6 +153,9 @@ void Engine::play() {
         if(keystate[SDL_SCANCODE_I]){
             player->shoot();
         }
+        if ( keystate[SDL_SCANCODE_E] ) {
+    sprites[0]->explode();
+  }
         if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
           makeVideo = true;

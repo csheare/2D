@@ -83,6 +83,10 @@
 
 <GreenBirdL>
   <file>assets/greenbirdL.png</file>
+  <chunk>
+    <size>16</size>
+    <distance>200</distance>
+  </chunk>
   <startLoc x="227" y="240"/>
   <frames>4</frames>
   <imageWidth>74.5</imageWidth>
@@ -96,6 +100,10 @@
 
 <GreenBird>
   <file>assets/greenbirdR.png</file>
+  <chunk>
+    <size>16</size>
+    <distance>200</distance>
+  </chunk>
   <startLoc x="227" y="240"/>
   <frames>4</frames>
   <imageWidth>74.5</imageWidth>

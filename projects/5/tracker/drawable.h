@@ -51,6 +51,7 @@ public:
 
   virtual int getWorldWidth() const = 0;
   virtual int getWorldHeight() const = 0;
+  virtual void explode() { throw std::string("I don't explode"); }
 private:
   std::string name;
   Vector2f position;

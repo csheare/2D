@@ -1,12 +1,14 @@
-// This is the "pointers" example in the Brian example
+#ifndef EXPLODINGSPRITE_H
+#define EXPLODINGSPRITE_H
 
 #include <vector>
 #include <list>
 #include "chunk.h"
 
-class ExplodingSprite : public Sprite {
+
+class ExplodingSprite : public TwoWaySprite {
 public:
-  ExplodingSprite(const Sprite& s);
+  ExplodingSprite(const TwoWaySprite& s);
   ~ExplodingSprite();
   virtual void draw() const;
   virtual void update(Uint32 ticks);
@@ -20,3 +22,5 @@ private:
   ExplodingSprite(const ExplodingSprite&); // Explicit disallow (Item 6)
   ExplodingSprite& operator=(const ExplodingSprite&); // (Item 6)
 };
+
+#endif

@@ -24,8 +24,8 @@ OBJS = \
 	bullet.o\
 	poolhud.o\
 	observer.o\
+	chunk.o\
 	explodingSprite.o\
-	chunks.o \
 	subject.o\
 	player.o \
 	vector2f.o \

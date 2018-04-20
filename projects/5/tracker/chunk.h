@@ -2,16 +2,16 @@
 #define CHUNK__H
 
 #include <iostream>
-#include "twowaysprite.h"
 #include "gamedata.h"
+#include "twowaysprite.h"
 
 class Chunk : public TwoWaySprite {
 public:
   explicit Chunk( const Vector2f& pos, const Vector2f vel,
                   const string& name, Image* fm) :
-    Sprite(name, pos, vel, fm),
+    TwoWaySprite(name),
     distance(0),
-    maxDistance(Gamedata::getInstance().getXmlInt(name+"/distance")),
+    maxDistance(Gamedata::getInstance().getXmlInt(name+"/chunk/distance")),
     tooFar(false),
     image(fm)
   { }

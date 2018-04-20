@@ -5,16 +5,21 @@
 #include <cmath>
 #include "multisprite.h"
 #include "drawable.h"
-#include "explodingSprite.h"
+
+class ExplodingSprite;
 
 class TwoWaySprite : public MultiSprite {
 public:
   TwoWaySprite(const std::string&);
   TwoWaySprite(const TwoWaySprite&);
+  // TwoWaySprite(const string& n, const Vector2f& pos, const Vector2f& vel,
+  //                const Image* img);
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
-  void explode();
+  virtual void explode();
+
+  virtual ~TwoWaySprite();
 
   virtual const Image* getImage() const {
     return images[currentFrame];
@@ -34,15 +39,6 @@ public:
 
   virtual int getWorldWidth() const {return worldWidth;}
   virtual int getWorldHeight()  const{return worldHeight;}
-
-  // float getMinFrameDelay() const{ return minFrameDelay;}
-  // void setMinFrameDelay(float x){ minFrameDelay = x; }
-  //
-  // float getFrameDelay() const{return frameDelay;}
-  // void setFrameDelay(float x){frameDelay = x;}
-  //
-  // unsigned getFrameSpeed() const{ return frameSpeed;}
-  // void setFrameSpeed(unsigned x){ FrameSpeed = x; }
 
   unsigned getCurrentFrame() const{ return currentFrame;}
   void setCurrentFrame(unsigned x){ currentFrame = x;}

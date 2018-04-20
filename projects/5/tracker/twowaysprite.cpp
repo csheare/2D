@@ -1,6 +1,7 @@
 #include "twowaysprite.h"
 #include "gamedata.h"
 #include "renderContext.h"
+#include "explodingSprite.h"
 
 
 TwoWaySprite::~TwoWaySprite() { if ( explosion ) delete explosion; }
@@ -38,6 +39,15 @@ MultiSprite(name),
   worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
   explosion(nullptr)
 { }
+
+// TwoWaySprite::TwoWaySprite(const string& n, const Vector2f& pos, const Vector2f& vel,
+//                const Image* img):
+//   Drawable(n, pos, vel),
+//   image( img ),
+//   explosion(nullptr),
+//   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+//   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
+// { }
 
 TwoWaySprite::TwoWaySprite(const TwoWaySprite& s) :
   MultiSprite(s),
@@ -87,6 +97,8 @@ void TwoWaySprite::setImagesRight(){
 void TwoWaySprite::setImagesLeft(){
   images = imagesLeft;
 }
+
+
 
 
 void TwoWaySprite::update(Uint32 ticks) {
