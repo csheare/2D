@@ -3,6 +3,7 @@
 #include  "gamedata.h"
 
 
+
 Bullet::Bullet(const std::string&name, const Vector2f&pos, const Vector2f&vel):
   Sprite(name,pos,vel, ImageFactory::getInstance().getImage(name)),
   distance(0),
@@ -15,7 +16,10 @@ Bullet::Bullet(const Bullet&b):
   distance(b.distance),
   maxDistance(b.maxDistance),
   tooFar(b.tooFar)
-{}
+{
+
+  std::cout << "COPY\n" << std::endl;
+}
 void Bullet::update(Uint32 ticks){
   Vector2f pos = getPosition();
   Sprite::update(ticks);

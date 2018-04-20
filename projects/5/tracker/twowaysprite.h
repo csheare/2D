@@ -5,6 +5,7 @@
 #include <cmath>
 #include "multisprite.h"
 #include "drawable.h"
+#include "explodingSprite.h"
 
 class TwoWaySprite : public MultiSprite {
 public:
@@ -13,6 +14,7 @@ public:
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
+  void explode();
 
   virtual const Image* getImage() const {
     return images[currentFrame];
@@ -54,11 +56,6 @@ public:
   float getTimeSinceLastFrame() const { return timeSinceLastFrame;}
   void setTimeSinceLastFrame(float x){ timeSinceLastFrame =x;}
 
-
-
-
-
-
 protected:
   std::vector<Image*> images;
   std::vector<Image *> imagesRight;
@@ -74,5 +71,8 @@ protected:
   virtual void advanceFrame(Uint32 ticks);
   TwoWaySprite& operator=(const TwoWaySprite&);
   Vector2f makeVelocity(int, int) const;
+
+private:
+  ExplodingSprite* explosion;
 };
 #endif

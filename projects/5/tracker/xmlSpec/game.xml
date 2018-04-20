@@ -12,7 +12,7 @@
 <username>csheare</username>
 
 <numOfSprites>7</numOfSprites>
-<numOfBullets>20</numOfBullets>
+<numOfBullets>10</numOfBullets>
 
 <HudInfo>
   <Line1>To Move: WASD</Line1>
@@ -23,7 +23,8 @@
 </HudInfo>
 
 <!--This can be "PerPixel", "Recgatngular", or "MidPoint" -->
-<collisionStrategy>"Rectangular"</collisionStrategy>
+
+<collisionStrategy>Rectangular</collisionStrategy>
 
 <HudPlacement>
   <loc>
@@ -106,36 +107,94 @@
   <safeDistance>75</safeDistance>
 </GreenBird>
 
+<GreenBirdR>
+  <file>assets/greenbirdR.png</file>
+  <startLoc x="227" y="240"/>
+  <frames>4</frames>
+  <imageWidth>74.5</imageWidth>
+  <imageHeight>47</imageHeight>
+  <frameInterval>300</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <safeDistance>75</safeDistance>
+</GreenBirdR>
+
+
+<Eagle>
+  <file>assets/eagleR.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>119</imageWidth>
+  <imageHeight>65</imageHeight>
+  <frameInterval>500</frameInterval>
+  <minFrameDelay>10</minFrameDelay>
+  <frameSpeed>500</frameSpeed>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <bulletName>Boulder</bulletName>
+</Eagle>
+
+<EagleR>
+  <file>assets/eagleR.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>119</imageWidth>
+  <imageHeight>65</imageHeight>
+  <frameInterval>500</frameInterval>
+  <minFrameDelay>20</minFrameDelay>
+  <frameSpeed>50</frameSpeed>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <bulletName>Boulder</bulletName>
+</EagleR>
+
 <EagleL>
   <file>assets/eagleL.png</file>
   <startLoc x="50" y="140"/>
   <frames>4</frames>
   <imageWidth>119</imageWidth>
   <imageHeight>65</imageHeight>
-  <frameInterval>300</frameInterval>
+  <frameInterval>500</frameInterval>
   <minFrameDelay>20</minFrameDelay>
-  <frameSpeed>200</frameSpeed>
+  <frameSpeed>500</frameSpeed>
   <speedX>200</speedX>
   <speedY>200</speedY>
   <transparency>false</transparency>
   <bulletName>Boulder</bulletName>
 </EagleL>
 
-<Eagle>
-    <file>assets/eagleR.png</file>
-    <startLoc x="50" y="140"/>
-    <frames>4</frames>
-    <imageWidth>119</imageWidth>
-    <imageHeight>65</imageHeight>
-    <frameInterval>300</frameInterval>
-    <minFrameDelay>20</minFrameDelay>
-    <frameSpeed>200</frameSpeed>
-    <speedX>200</speedX>
-    <speedY>200</speedY>
-    <transparency>false</transparency>
-    <bulletName>Boulder</bulletName>
-</Eagle>
+<EagleSL>
+  <file>assets/eagleShootingL.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>119</imageWidth>
+  <imageHeight>65</imageHeight>
+  <frameInterval>500</frameInterval>
+  <minFrameDelay>20</minFrameDelay>
+  <frameSpeed>500</frameSpeed>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <bulletName>Boulder</bulletName>
+</EagleSL>
 
+<EagleSR>
+  <file>assets/eagleShootingR.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>119</imageWidth>
+  <imageHeight>65</imageHeight>
+  <frameInterval>500</frameInterval>
+  <minFrameDelay>20</minFrameDelay>
+  <frameSpeed>500</frameSpeed>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+  <bulletName>Boulder</bulletName>
+</EagleSR>
 
 <WindSpinner>
   <file>assets/windspinner5.png</file>
@@ -151,9 +210,9 @@
 
 <Boulder>
   <file>assets/boulder.png</file>
-  <startLoc x="227" y="240"/>
-  <imageWidth>27</imageWidth>
-  <imageHeight>27</imageHeight>
+  <startLoc x="227" y="140"/>
+  <imageWidth>10</imageWidth>
+  <imageHeight>10</imageHeight>
   <speedX>400</speedX>
   <speedY>400</speedY>
   <frames>1</frames>
@@ -161,7 +220,7 @@
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
   <frameSpeed>200</frameSpeed>
-  <minSpeed>400</minSpeed>
+  <minSpeed>100</minSpeed>
 </Boulder>
 
 </GameData>

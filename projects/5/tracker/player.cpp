@@ -6,7 +6,7 @@
 
 void Player::advanceFrame(Uint32 ticks){
   TwoWaySprite::advanceFrame(ticks);
-  float speed = 3*getVelocity().magnitude();
+  float speed = getVelocity().magnitude();
   frameDelay += std::max(minFrameDelay, speed);
   if(frameDelay > frameSpeed){
     incrFrame();
@@ -23,9 +23,9 @@ void Player::draw() const {
 
 void Player::update(Uint32 ticks){
   if ( !collision ){
-       TwoWaySprite::update(ticks);
+      advanceFrame(ticks);
   }
-  advanceFrame(ticks);
+  //TwoWaySprite::update(ticks);
   timeSinceLastBullet += ticks;
   bullets.update(ticks);
 
@@ -45,18 +45,17 @@ void Player::update(Uint32 ticks){
     setVelocityX(-std::abs(getVelocityX()));
   }
   if(getVelocityX() > 0){
-    setImagesRight();
+    images = imagesRight;
     facing = RIGHT;
   }
-  if(getVelocityX() < 0){
-    setImagesLeft();
+  else if(getVelocityX() < 0){
+    images = imagesLeft;
     facing = LEFT;
   }
   else{
-    if(facing == LEFT) setImagesLeft();
-    else setImagesRight();
+    if(facing == LEFT) images = imagesLeft;
+    else images = imagesRight;
   }
-
   stop();
 }
 
@@ -64,20 +63,19 @@ void Player::update(Uint32 ticks){
 
 Player::Player(const std::string& name) :
   TwoWaySprite(name),
-  imagesShootLeft(RenderContext::getInstance()->getImages(name + "L")),
-  imagesShootRight(RenderContext::getInstance()->getImages(name)),
+  imagesShootLeft(RenderContext::getInstance()->getImages(name + "SL")),
+  imagesShootRight(RenderContext::getInstance()->getImages(name+ "SR")),
   collision(false),
   initialVelocity(getVelocity()),
   minFrameDelay(Gamedata::getInstance().getXmlFloat(name+"/minFrameDelay")),
   frameDelay(0),
   frameSpeed(Gamedata::getInstance().getXmlFloat(name+"/frameSpeed")),
   timeSinceLastImage(0),
-  numBullets(Gamedata::getInstance().getXmlInt("numOfBullets")),
   bulletName(Gamedata::getInstance().getXmlStr(name+"/bulletName")),
   bulletInterval(Gamedata::getInstance().getXmlInt(bulletName + "/frameSpeed")),
   timeSinceLastBullet(0),
   minBulletSpeed(Gamedata::getInstance().getXmlInt(bulletName + "/minSpeed")),
-  bullets(bulletName),
+  bullets(bulletName,this->getPosition(),initialVelocity),
   facing(RIGHT)
 {
 }
@@ -92,7 +90,6 @@ Player::Player(const Player& s) :
   frameDelay(s.frameDelay),
   frameSpeed(s.frameSpeed),
   timeSinceLastImage(s.timeSinceLastImage),
-  numBullets(s.numBullets),
   bulletName(s.bulletName),
   bulletInterval(s.bulletInterval),
   timeSinceLastBullet(s.timeSinceLastBullet),
@@ -109,11 +106,22 @@ Player& Player::operator=(const Player& s) {
 }
 
 void Player::shoot(){
-  if(getVelocityX()> 0){ images = imagesShootRight;}
-  else if(getVelocityX() < 0){ images = imagesShootLeft;}
-  else if ( facing == RIGHT){ images = imagesShootRight;}
-  else if( facing == LEFT){ images = imagesShootLeft;}
-
+  std::cout << "Shooting" << std::endl;
+  if(getVelocityX()> 0){
+    std::cout << "ShootingR" << std::endl;
+    images = imagesShootRight;
+  }
+  else if(getVelocityX() < 0){
+    std::cout << "ShootingL" << std::endl;
+    images = imagesShootLeft;
+  }
+  else if ( facing == RIGHT){
+    std::cout << "ShootingR" << std::endl;
+    images = imagesShootRight;
+  }
+  else if( facing == LEFT){
+    images = imagesShootLeft;
+  }
   if(timeSinceLastBullet > bulletInterval){
     Vector2f vel = getVelocity();
     float x = 0;//questionable
@@ -140,21 +148,18 @@ void Player::shoot(){
 }
 
 void Player::stop() {
-  setVelocityX( 0.5*getVelocityX() );
-  setVelocityY(0);
+  setVelocity( Vector2f(0,0));
 }
 
 
 void Player::right() {
   if ( getX()  < getWorldWidth()-getScaledWidth() ) {
     setVelocityX(initialVelocity[0]);
-    setImagesRight();//For Two Way
   }
 }
 void Player::left()  {
   if ( getX() > 0) {
      setVelocityX(-initialVelocity[0]);
-     setImagesLeft();//For Two Way
   }
 }
 void Player::up()    {

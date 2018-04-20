@@ -4,6 +4,10 @@
 #include <string>
 #include <random>
 #include <iomanip>
+#include <sys/select.h>
+#include <sys/time.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "sprite.h"
 #include "multisprite.h"
@@ -71,12 +75,14 @@ void Engine::draw() const {
   front.draw();
   hud.draw();
   poolHud.draw();
+
+  player->draw();
   for(Drawable* sprite : sprites){
     static_cast<Observer*>(sprite)->draw();
   }
 
   //strategies[currentStrategy]->draw();
-  player->draw();
+
   //viewport.draw(clock.getFps());
   SDL_RenderPresent(renderer);
 }
@@ -84,22 +90,24 @@ void Engine::draw() const {
 void Engine::checkForCollisions() {
   auto it = sprites.begin();
   while ( it != sprites.end() ) {
-    if ( strategies[currentStrategy]->execute(*player, **it ) ){
+    if ( player->getBullets().collided(*it)){//trategies[currentStrategy]->execute(*player, **it ) ){
+      std::cout << "REMOVING SPRITE\n" << std::endl;
       Observer* doa = static_cast<Observer*>(*it);
-      //player->detach(doa);
-      //it = sprites.erase(it);
-      //delete doa;
-      doa->update(clock.getElapsedTicks());
-    }//else{
+      player->detach(doa);
+      it = sprites.erase(it);
+      delete doa;
+      //doa->update(clock.getElapsedTicks());
+    }else{
           ++it;
-
-
+    }
   }
 }
 
 void Engine::update(Uint32 ticks) {
+
   checkForCollisions();
   player->update(ticks);
+
   for(Drawable* s : sprites){
     static_cast<Observer*>(s)->update(ticks);
   }

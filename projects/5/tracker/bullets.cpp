@@ -7,6 +7,12 @@
 
 
 Bullets::~Bullets(){
+  // for(Bullet* b : freeList){
+  //   delete b;
+  // }
+  // for(Bullet * b : BulletList){
+  //   delete b;
+  // }
 }
 
 Bullets& Bullets::operator=(const Bullets& rhs){
@@ -37,8 +43,8 @@ Bullets& Bullets::operator=(const Bullets& rhs){
   return *this;
 }
 
-Bullets::Bullets(const std::string&n):
-  name(n),
+Bullets::Bullets(const std::string&name, const Vector2f&pos, const Vector2f&vel):
+  name(name),
   myVelocity(
     Gamedata::getInstance().getXmlInt(name+"/speedX"),
     Gamedata::getInstance().getXmlInt(name+"/speedY")
@@ -46,7 +52,8 @@ Bullets::Bullets(const std::string&n):
   BulletImages(ImageFactory::getInstance().getImages(name)),
   freeList(),
   BulletList(),
-  strategy(NULL)
+  strategy(NULL),
+  numBullets(Gamedata::getInstance().getXmlInt("numOfBullets"))
   {
     const string thisStrategy = Gamedata::getInstance().getXmlStr("collisionStrategy");
     if(thisStrategy == "PerPixel"){
@@ -57,6 +64,9 @@ Bullets::Bullets(const std::string&n):
       strategy = new MidPointCollisionStrategy();
     }
 
+    for(int i = 0; i< numBullets;i++){
+      freeList.push_back(new Bullet(name,pos,vel));
+    }
 }
 
 Bullets::Bullets(const Bullets &b):
@@ -70,41 +80,42 @@ Bullets::Bullets(const Bullets &b):
 
 void Bullets::draw() const{
   for(const auto& Bullet : BulletList){
-    Bullet.draw();
+    Bullet->draw();
   }
 
 }
 void Bullets::update(Uint32 ticks){
-  std::list<Bullet>::iterator itr = BulletList.begin();
+  std::list<Bullet*>::iterator itr = BulletList.begin();
   while(itr != BulletList.end()){
-    itr->update(ticks);
-    if(itr->goneTooFar()){
+    (*itr)->update(ticks);
+    if((*itr)->goneTooFar()){
       freeList.push_back(*itr);
       itr = BulletList.erase(itr);
     }else{
-          itr++;
+        itr++;
     }
   }
 }
 void Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
   if(freeList.empty()){
-    Bullet b(name, pos,objVel);
-    BulletList.push_back(b);
+    BulletList.push_back(new Bullet(name, pos,objVel));
   }else{
-    Bullet b = freeList.front();
+    Bullet * b = freeList.front();
     freeList.pop_front();
-    b.reset();
-    b.setVelocity(objVel);
-    b.setPosition(pos);
+    b->reset();
+    b->setVelocity(objVel);
+    b->setPosition(pos);
     BulletList.push_back(b);
   }
 }
 
 bool Bullets::collided(const Drawable*obj) const{
-  for(const auto& Bullet: BulletList){
-    if(strategy->execute(Bullet,*obj)){
+  auto it = BulletList.begin();
+  while(it != BulletList.end()){
+    if(strategy->execute(**it,*obj)){
       return true;
     }
+    ++it;
   }
   return false;
 }

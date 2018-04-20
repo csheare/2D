@@ -12,7 +12,7 @@ public:
   Player(const std::string& n);
   Player(const Player& s);
   virtual ~Player(){}
-  virtual void advanceFrame(Uint32);
+  void advanceFrame(Uint32);
 
   void collided() { collision = true; }
   void missed() { collision = false; }
@@ -20,7 +20,7 @@ public:
 
   void shoot();
 
-  void incrFrame() { frameSpeed++;}
+  virtual void incrFrame() { currentFrame = (currentFrame+1) % numberOfFrames;}
   //this is for pool hud
   unsigned int bulletCount() const { return bullets.BulletCount();}
   unsigned int freeCount()   const { return bullets.freeCount();}
@@ -28,6 +28,11 @@ public:
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
+
+  Bullets getBullets() const {
+    return bullets;
+  }
+
 
   void right();
   void left();
@@ -49,7 +54,7 @@ private:
   float timeSinceLastImage;
 
   //Data Attributes that descibe Bullets
-  int numBullets;
+
   std::string bulletName;
   float bulletInterval;
   float timeSinceLastBullet;
@@ -58,11 +63,6 @@ private:
 
   enum FACE { LEFT, RIGHT};
   FACE facing;
-  //std::list<Bullets*> bullets;
-
-
-
-
 
 };
 #endif
