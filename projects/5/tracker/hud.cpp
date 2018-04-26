@@ -17,13 +17,25 @@ void Hud::draw()const{
   SDL_RenderFillRect( renderer, &hudFrame );
 
   std::stringstream strm;
-  strm << "Tracking Eagle: ";
-  io.writeText(strm.str(), hudFrame.x+20,22);
+  strm << "Toggle with F1!";
+  io.writeText(strm.str(), hudFrame.x+5,200);
+
+  strm.clear();//clear error flags
+  strm.str(""); //clear content
+
+  strm << "Explode with E!";
+  io.writeText(strm.str(), hudFrame.x+5,250);
+
+  strm.clear();//clear error flags
+  strm.str(""); //clear content
+
+  strm << "Shoot with I!";
+  io.writeText(strm.str(), hudFrame.x+5,300);
 
   strm.clear();//clear error flags
   strm.str(""); //clear content
   strm << "Move Player: ASWD";
-  io.writeText(strm.str(), hudFrame.x+20,50);
+  io.writeText(strm.str(), hudFrame.x+5,350);
 
   // Now set the color for the outline of the hud:
   SDL_SetRenderDrawColor( renderer,

@@ -2,7 +2,10 @@
 #include <cmath>
 #include "twowaysprite.h"
 #include "gamedata.h"
+#include "explodingSprite.h"
 
+
+Player::~Player( ) { if (explosion) delete explosion; }
 
 void Player::advanceFrame(Uint32 ticks){
   TwoWaySprite::advanceFrame(ticks);
@@ -15,13 +18,25 @@ void Player::advanceFrame(Uint32 ticks){
 }
 
 void Player::draw() const {
-  bullets.draw();
-  Uint32 x = static_cast<Uint32>(getX());
-  Uint32 y = static_cast<Uint32>(getY());
-  images[currentFrame]->draw(x,y);
+  if ( explosion ) explosion->draw();
+  else{
+    bullets.draw();
+    Uint32 x = static_cast<Uint32>(getX());
+    Uint32 y = static_cast<Uint32>(getY());
+    images[currentFrame]->draw(x,y);
+  }
 }
 
 void Player::update(Uint32 ticks){
+  if ( explosion ) {
+  explosion->update(ticks);
+  if ( explosion->chunkCount() == 0 ) {
+    delete explosion;
+    explosion = NULL;
+  }
+  return;
+  }
+
   if ( !collision ){
       advanceFrame(ticks);
   }
@@ -63,6 +78,7 @@ void Player::update(Uint32 ticks){
 
 Player::Player(const std::string& name) :
   TwoWaySprite(name),
+  explosion(nullptr),
   imagesShootLeft(RenderContext::getInstance()->getImages(name + "SL")),
   imagesShootRight(RenderContext::getInstance()->getImages(name+ "SR")),
   collision(false),
@@ -82,6 +98,7 @@ Player::Player(const std::string& name) :
 
 Player::Player(const Player& s) :
   TwoWaySprite(s),
+  explosion(s.explosion),
   imagesShootLeft(s.imagesShootLeft),
   imagesShootRight(s.imagesShootRight),
   collision(s.collision),
@@ -147,6 +164,14 @@ void Player::shoot(){
   }
 }
 
+void Player::explode() {
+  if ( !explosion ) {
+    Sprite
+    sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+    explosion = new ExplodingSprite(sprite);
+  }
+}
+
 void Player::stop() {
   setVelocity( Vector2f(0,0));
 }
@@ -172,6 +197,13 @@ void Player::down()  {
     setVelocityY( initialVelocity[1] );
   }
 }
+// void explode(){
+//   this.explode();
+//     // if ( !getExplosion() ) {
+//     // Sprite
+//     // sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+//     // setExplosion(new ExplodingSprite(sprite));
+// }
 
 // void Player::update(Uint32 ticks) {
 //   if ( !collision ){

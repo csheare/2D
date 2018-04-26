@@ -16,6 +16,7 @@ public:
   Subject(const std::string& name);
   Subject(const Subject&s);
   virtual void update(Uint32 ticks);
+  virtual void explode(){ this->Player::explode();}
 
   void attach( Observer* o ) { observers.push_back(o); }
 

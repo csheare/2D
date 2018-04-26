@@ -2,8 +2,8 @@
 #include <cmath>
 #include "explodingSprite.h"
 
-ExplodingSprite::ExplodingSprite(const TwoWaySprite& s) :
-  TwoWaySprite(s),
+ExplodingSprite::ExplodingSprite(const Sprite& s) :
+  Sprite(s),
   chunks(),
   freeList(){
   makeChunks(
@@ -69,7 +69,7 @@ void ExplodingSprite::makeChunks(unsigned int n) {
                 Vector2f(getX()+source_x,   // x coord of destination
                          getY()+source_y),  // y coord of destination
                 Vector2f(sx, sy),
-                getName(),
+                getName()+"/chunk",
                 image);
       chunk->setScale( getScale() );
       chunks.push_back(chunk);

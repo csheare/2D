@@ -4,7 +4,6 @@
 #include "chunk.h"
 
 void Chunk::update(Uint32 ticks) {
-  //TwoWaySprite::update(ticks);
   float yincr = getVelocityY() * static_cast<float>(ticks) * 0.001;
   setY( getY()- yincr );
   float xincr = getVelocityX() * static_cast<float>(ticks) * 0.001;

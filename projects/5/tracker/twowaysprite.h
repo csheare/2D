@@ -52,7 +52,9 @@ public:
   float getTimeSinceLastFrame() const { return timeSinceLastFrame;}
   void setTimeSinceLastFrame(float x){ timeSinceLastFrame =x;}
 
+
 protected:
+  ExplodingSprite* explosion;
   std::vector<Image*> images;
   std::vector<Image *> imagesRight;
   std::vector<Image *> imagesLeft;
@@ -68,7 +70,5 @@ protected:
   TwoWaySprite& operator=(const TwoWaySprite&);
   Vector2f makeVelocity(int, int) const;
 
-private:
-  ExplodingSprite* explosion;
 };
 #endif

@@ -7,11 +7,13 @@
 #include "bullet.h"
 #include "renderContext.h"
 
+class ExplodingSprite;
+
 class Player : public TwoWaySprite{
 public:
   Player(const std::string& n);
   Player(const Player& s);
-  virtual ~Player(){}
+  ~Player();
   void advanceFrame(Uint32);
 
   void collided() { collision = true; }
@@ -33,6 +35,9 @@ public:
     return bullets;
   }
 
+  virtual void explode();
+
+
 
   void right();
   void left();
@@ -42,6 +47,7 @@ public:
 
 private:
 
+  ExplodingSprite* explosion;
   const std::vector<Image*> imagesShootLeft;
   const std::vector<Image*> imagesShootRight;
   bool collision;

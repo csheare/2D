@@ -5,10 +5,9 @@
 #include <list>
 #include "chunk.h"
 
-
-class ExplodingSprite : public TwoWaySprite {
+class ExplodingSprite : public Sprite {
 public:
-  ExplodingSprite(const TwoWaySprite& s);
+  ExplodingSprite(const Sprite& s);
   ~ExplodingSprite();
   virtual void draw() const;
   virtual void update(Uint32 ticks);

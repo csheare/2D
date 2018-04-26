@@ -28,6 +28,7 @@ void TwoWaySprite::advanceFrame(Uint32 ticks) {
 
 TwoWaySprite::TwoWaySprite( const std::string& name) :
 MultiSprite(name),
+  explosion(nullptr),
   images( RenderContext::getInstance()->getImages(name + "R")),
   imagesRight(RenderContext::getInstance()->getImages(name + "R")),
   imagesLeft(RenderContext::getInstance()->getImages(name + "L")),
@@ -36,8 +37,7 @@ MultiSprite(name),
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
-  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
-  explosion(nullptr)
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
 
 // TwoWaySprite::TwoWaySprite(const string& n, const Vector2f& pos, const Vector2f& vel,
@@ -51,6 +51,7 @@ MultiSprite(name),
 
 TwoWaySprite::TwoWaySprite(const TwoWaySprite& s) :
   MultiSprite(s),
+  explosion(s.explosion),
   images(s.images),
   imagesRight(s.imagesRight),
   imagesLeft(s.imagesLeft),
@@ -59,8 +60,7 @@ TwoWaySprite::TwoWaySprite(const TwoWaySprite& s) :
   frameInterval( s.frameInterval ),
   timeSinceLastFrame( s.timeSinceLastFrame ),
   worldWidth( s.worldWidth ),
-  worldHeight( s.worldHeight ),
-  explosion(s.explosion)
+  worldHeight( s.worldHeight )
   { }
 
 TwoWaySprite& TwoWaySprite::operator=(const TwoWaySprite& s) {
@@ -81,8 +81,14 @@ inline namespace{
   constexpr float SCALE_EPSILON = 2e-7;
 }
 
+
+
 void TwoWaySprite::explode() {
-  if ( !explosion ) explosion = new ExplodingSprite(*this);
+  if ( !explosion ) {
+  Sprite
+  sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+  explosion = new ExplodingSprite(sprite);
+}
 }
 
 void TwoWaySprite::draw() const {
@@ -124,11 +130,11 @@ void TwoWaySprite::update(Uint32 ticks) {
 
   if ( getX() > getWorldWidth()-getScaledWidth()) {
     TwoWaySprite::setVelocityX( -fabs( getVelocityX() ) );
-    //setImagesLeft();
+    setImagesLeft();
   }
   if (getX() < 0) {
     TwoWaySprite::setVelocityX( fabs( getVelocityX() ) );
-    //setImagesRight();
+    setImagesRight();
   }
 
 }

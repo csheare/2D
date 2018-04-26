@@ -40,8 +40,8 @@
     <x>400</x>
     <y>10</y>
   </loc>
-  <width>20</width>
-  <height>20</height>
+  <width>150</width>
+  <height>70</height>
 </PoolHudPlacement>
 
 <view>
@@ -132,6 +132,10 @@
 <Eagle>
   <file>assets/eagleR.png</file>
   <startLoc x="50" y="140"/>
+  <chunk>
+    <size>16</size>
+    <distance>200</distance>
+  </chunk>
   <frames>4</frames>
   <imageWidth>119</imageWidth>
   <imageHeight>65</imageHeight>
@@ -147,6 +151,10 @@
 <EagleR>
   <file>assets/eagleR.png</file>
   <startLoc x="50" y="140"/>
+  <chunk>
+    <size>16</size>
+    <distance>200</distance>
+  </chunk>
   <frames>4</frames>
   <imageWidth>119</imageWidth>
   <imageHeight>65</imageHeight>
@@ -162,6 +170,10 @@
 <EagleL>
   <file>assets/eagleL.png</file>
   <startLoc x="50" y="140"/>
+  <chunk>
+    <size>16</size>
+    <distance>200</distance>
+  </chunk>
   <frames>4</frames>
   <imageWidth>119</imageWidth>
   <imageHeight>65</imageHeight>
@@ -177,6 +189,10 @@
 <EagleSL>
   <file>assets/eagleShootingL.png</file>
   <startLoc x="50" y="140"/>
+  <chunk>
+    <size>16</size>
+    <distance>200</distance>
+  </chunk>
   <frames>4</frames>
   <imageWidth>119</imageWidth>
   <imageHeight>65</imageHeight>
@@ -192,6 +208,10 @@
 <EagleSR>
   <file>assets/eagleShootingR.png</file>
   <startLoc x="50" y="140"/>
+  <chunk>
+    <size>16</size>
+    <distance>200</distance>
+  </chunk>
   <frames>4</frames>
   <imageWidth>119</imageWidth>
   <imageHeight>65</imageHeight>
@@ -221,14 +241,14 @@
   <startLoc x="227" y="140"/>
   <imageWidth>10</imageWidth>
   <imageHeight>10</imageHeight>
-  <speedX>400</speedX>
-  <speedY>400</speedY>
+  <speedX>500</speedX>
+  <speedY>500</speedY>
   <frames>1</frames>
-  <distance>500</distance>
+  <distance>200</distance>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
-  <frameSpeed>200</frameSpeed>
-  <minSpeed>100</minSpeed>
+  <frameSpeed>500</frameSpeed>
+  <minSpeed>300</minSpeed>
 </Boulder>
 
 </GameData>
