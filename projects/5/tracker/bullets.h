@@ -32,8 +32,8 @@ private:
   std::string name;
   Vector2f myVelocity;
   std::vector<Image*> BulletImages;
-  std::list<Bullet*> freeList;//used Bullet*
-  std::list<Bullet*> BulletList;
+  std::list<*Bullet> freeList;//used Bullet*
+  std::list<*Bullet> BulletList;
   CollisionStrategy * strategy;
   int numBullets;
 

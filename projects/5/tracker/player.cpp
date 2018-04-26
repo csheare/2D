@@ -63,9 +63,9 @@ void Player::update(Uint32 ticks){
       setVelocityX(-std::abs(getVelocityX()));
       facing = LEFT;
     }
-
+    std::cout << "Delay is: " << delay << std::endl;
     if(delay > 0){
-      delay -= ticks;
+      delay--;
       if(getVelocityX() > 0){
         images = imagesShootRight;
         facing = RIGHT;
@@ -78,11 +78,13 @@ void Player::update(Uint32 ticks){
       std::cout << "Regular Right" << std::endl;
       images = imagesRight;
       facing = RIGHT;
+      delay =0;
     }
     else if(getVelocityX() < 0){
       std::cout << "Regular Left" << std::endl;
       images = imagesLeft;
       facing = LEFT;
+      delay =0;
     }
     else{
       if(facing == LEFT){
@@ -93,7 +95,9 @@ void Player::update(Uint32 ticks){
         std::cout << "Regular Right" << std::endl;
         images = imagesRight;
       }
+      delay =0;
     }
+
     stop();
 }
 
@@ -150,22 +154,22 @@ void Player::shoot(){
   if(getVelocityX() > 0){
     std::cout << "ShootingRight" << std::endl;
     images = imagesShootRight;
-    delay = 100;
+    delay = 5;
   }
   else if(getVelocityX() < 0){
     std::cout << "ShootingLeft" << std::endl;
     images = imagesShootLeft;
-    delay = 100;
+    delay = 5;
   }
   else if ( facing == RIGHT){
     std::cout << "ShootingRight" << std::endl;
     images = imagesShootRight;
-    delay = 100;
+    delay = 5;
   }
   else if( facing == LEFT){
     std::cout << "ShootingLeft" << std::endl;
     images = imagesShootLeft;
-    delay = 100;
+    delay = 5;
   }
   if(timeSinceLastBullet > bulletInterval){
     Vector2f vel = getVelocity();
