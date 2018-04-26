@@ -30,58 +30,71 @@ void Player::draw() const {
 }
 
 void Player::update(Uint32 ticks){
-  if ( explosion ) {
-  explosion->update(ticks);
-  if ( explosion->chunkCount() == 0 ) {
-    delete explosion;
-    explosion = NULL;
-  }
-  return;
-  }
-
-  if ( !collision ){
-      advanceFrame(ticks);
-  }
-  //TwoWaySprite::update(ticks);
-  timeSinceLastBullet += ticks;
-  bullets.update(ticks);
-
-  Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
-  setPosition(getPosition() + incr);
-
-  if(getY() < 0){
-    setVelocityY(std::abs(getVelocityY()));
-  }
-  if(getY() > worldHeight-getScaledHeight()){
-    setVelocityY(-std::abs(getVelocityY()));
-  }
-  if(getX() < 0){
-    setVelocityX(std::abs(getVelocityX()));
-  }
-  if(getX() > worldWidth - getScaledWidth()){
-    setVelocityX(-std::abs(getVelocityX()));
-  }
-  if(getVelocityX() > 0){
-    std::cout << "Regular Right" << std::endl;
-    images = imagesRight;
-    facing = RIGHT;
-  }
-  else if(getVelocityX() < 0){
-    std::cout << "Regular Left" << std::endl;
-    images = imagesLeft;
-    facing = LEFT;
-  }
-  else{
-    if(facing == LEFT){
-      std::cout << "Regular Left" << std::endl;
-      images = imagesLeft;
+    if ( explosion ) {
+    explosion->update(ticks);
+    if ( explosion->chunkCount() == 0 ) {
+      delete explosion;
+      explosion = NULL;
     }
-    else{
+    return;
+    }
+
+    if ( !collision ){
+        advanceFrame(ticks);
+    }
+    //TwoWaySprite::update(ticks);
+    timeSinceLastBullet += ticks;
+    bullets.update(ticks);
+
+    Vector2f incr = getVelocity() * static_cast<float>(ticks) * 0.001;
+    setPosition(getPosition() + incr);
+
+    if(getY() < 0){
+      setVelocityY(std::abs(getVelocityY()));
+    }
+    if(getY() > worldHeight-getScaledHeight()){
+      setVelocityY(-std::abs(getVelocityY()));
+    }
+    if(getX() < 0){
+      setVelocityX(std::abs(getVelocityX()));
+      facing = RIGHT;
+    }
+    if(getX() > worldWidth - getScaledWidth()){
+      setVelocityX(-std::abs(getVelocityX()));
+      facing = LEFT;
+    }
+
+    if(delay > 0){
+      delay -= ticks;
+      if(getVelocityX() > 0){
+        images = imagesShootRight;
+        facing = RIGHT;
+      }else if(getVelocityX() < 0){
+        images = imagesShootLeft;
+        facing = LEFT;
+      }
+    }
+    else if(getVelocityX() > 0){
       std::cout << "Regular Right" << std::endl;
       images = imagesRight;
+      facing = RIGHT;
     }
-  }
-  stop();
+    else if(getVelocityX() < 0){
+      std::cout << "Regular Left" << std::endl;
+      images = imagesLeft;
+      facing = LEFT;
+    }
+    else{
+      if(facing == LEFT){
+        std::cout << "Regular Left" << std::endl;
+        images = imagesLeft;
+      }
+      else{
+        std::cout << "Regular Right" << std::endl;
+        images = imagesRight;
+      }
+    }
+    stop();
 }
 
 
@@ -137,18 +150,22 @@ void Player::shoot(){
   if(getVelocityX() > 0){
     std::cout << "ShootingRight" << std::endl;
     images = imagesShootRight;
+    delay = 100;
   }
   else if(getVelocityX() < 0){
     std::cout << "ShootingLeft" << std::endl;
     images = imagesShootLeft;
+    delay = 100;
   }
   else if ( facing == RIGHT){
     std::cout << "ShootingRight" << std::endl;
     images = imagesShootRight;
+    delay = 100;
   }
   else if( facing == LEFT){
     std::cout << "ShootingLeft" << std::endl;
     images = imagesShootLeft;
+    delay = 100;
   }
   if(timeSinceLastBullet > bulletInterval){
     Vector2f vel = getVelocity();

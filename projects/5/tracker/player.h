@@ -47,6 +47,7 @@ public:
 
 private:
 
+  Uint32 delay = 0;
   ExplodingSprite* explosion;
   const std::vector<Image*> imagesShootLeft;
   const std::vector<Image*> imagesShootRight;
