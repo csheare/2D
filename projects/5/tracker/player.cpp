@@ -5,7 +5,9 @@
 #include "explodingSprite.h"
 
 
-Player::~Player( ) { if (explosion) delete explosion; }
+Player::~Player( ) {
+  if (explosion) delete explosion;
+ }
 
 void Player::advanceFrame(Uint32 ticks){
   TwoWaySprite::advanceFrame(ticks);
@@ -60,16 +62,24 @@ void Player::update(Uint32 ticks){
     setVelocityX(-std::abs(getVelocityX()));
   }
   if(getVelocityX() > 0){
+    std::cout << "Regular Right" << std::endl;
     images = imagesRight;
     facing = RIGHT;
   }
   else if(getVelocityX() < 0){
+    std::cout << "Regular Left" << std::endl;
     images = imagesLeft;
     facing = LEFT;
   }
   else{
-    if(facing == LEFT) images = imagesLeft;
-    else images = imagesRight;
+    if(facing == LEFT){
+      std::cout << "Regular Left" << std::endl;
+      images = imagesLeft;
+    }
+    else{
+      std::cout << "Regular Right" << std::endl;
+      images = imagesRight;
+    }
   }
   stop();
 }
@@ -124,19 +134,20 @@ Player& Player::operator=(const Player& s) {
 
 void Player::shoot(){
   std::cout << "Shooting" << std::endl;
-  if(getVelocityX()> 0){
-    std::cout << "ShootingR" << std::endl;
+  if(getVelocityX() > 0){
+    std::cout << "ShootingRight" << std::endl;
     images = imagesShootRight;
   }
   else if(getVelocityX() < 0){
-    std::cout << "ShootingL" << std::endl;
+    std::cout << "ShootingLeft" << std::endl;
     images = imagesShootLeft;
   }
   else if ( facing == RIGHT){
-    std::cout << "ShootingR" << std::endl;
+    std::cout << "ShootingRight" << std::endl;
     images = imagesShootRight;
   }
   else if( facing == LEFT){
+    std::cout << "ShootingLeft" << std::endl;
     images = imagesShootLeft;
   }
   if(timeSinceLastBullet > bulletInterval){

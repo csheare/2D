@@ -7,10 +7,7 @@
 
 
 Bullets::~Bullets(){
-  // for(Bullet* b : freeList){
-  //   delete b;
-  // }
-  // for(Bullet * b : BulletList){
+  // for(auto b : BulletList){
   //   delete b;
   // }
 }
@@ -75,7 +72,8 @@ Bullets::Bullets(const Bullets &b):
   BulletImages(b.BulletImages),
   freeList(b.freeList),
   BulletList(b.BulletList),
-  strategy(b.strategy)
+  strategy(b.strategy),
+  numBullets(Gamedata::getInstance().getXmlInt("numOfBullets"))
   {}
 
 void Bullets::draw() const{
