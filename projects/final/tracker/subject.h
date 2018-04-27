@@ -21,6 +21,7 @@ public:
   void attach( Observer* o ) { observers.push_back(o); }
 
   void detach( Observer* o );
+  void checkForDead();
   //need alert function
   virtual ~Subject() {}
 

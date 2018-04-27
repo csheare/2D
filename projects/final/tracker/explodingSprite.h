@@ -14,6 +14,7 @@ public:
   void makeChunks(unsigned int);
   unsigned int chunkCount() const { return chunks.size(); }
   unsigned int freeCount()  const { return freeList.size(); }
+
 private:
   std::list<Chunk*> chunks; // An ExplodingSprite is a list of sprite chunks
   std::list<Chunk*> freeList; // When a chunk gets out of range it goes here

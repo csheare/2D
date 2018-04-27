@@ -1,13 +1,17 @@
-// Brian Malloy        Data-Driven Object oriented Game Construction
+//Courtney Shearer       Data-Driven Object oriented Game Construction
 #include "engine.h"
 
 RenderContext* RenderContext::instance = NULL;
 
 int main(int, char*[]) {
+   bool keepPlaying = true;
    try {
-      Engine engine;
-      engine.play();
-      delete RenderContext::getInstance();
+     while ( keepPlaying ) {
+       Engine* engine = new Engine;
+       keepPlaying = engine->play();
+       delete engine;
+     }
+     delete RenderContext::getInstance();
    }
    catch (const string& msg) { std::cout << msg << std::endl; }
    catch (...) {

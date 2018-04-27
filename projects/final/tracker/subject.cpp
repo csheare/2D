@@ -29,9 +29,22 @@ void Subject::detach( Observer* o ) {
 
 void Subject::update(Uint32 ticks) {
   Player::update(ticks);
+  this->checkForDead();
   auto ptr = observers.begin();
   while ( ptr != observers.end() ) {
     (*ptr)->setPlayerPos( getPosition() );
     ++ptr;
+  }
+}
+
+void Subject::checkForDead(){
+  auto ptr = observers.begin();
+  while ( ptr != observers.end() ) {
+      if(((*ptr)->isAlive()) == false){
+        ptr = observers.erase(ptr);
+        //delete(*ptr);
+      }else{
+            ptr++;
+      }
   }
 }

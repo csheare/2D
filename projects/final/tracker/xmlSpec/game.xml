@@ -32,7 +32,7 @@
     <y>175</y>
   </loc>
   <width>150</width>
-  <height>200</height>
+  <height>250</height>
 </HudPlacement>
 
 <PoolHudPlacement>
@@ -248,7 +248,7 @@
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
   <frameSpeed>300</frameSpeed>
-  <minSpeed>200</minSpeed>
+  <minSpeed>300</minSpeed>
 </Boulder>
 
 </GameData>

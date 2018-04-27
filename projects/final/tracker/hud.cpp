@@ -37,6 +37,12 @@ void Hud::draw()const{
   strm << "Move Player: ASWD";
   io.writeText(strm.str(), hudFrame.x+5,350);
 
+  strm.clear();//clear error flags
+  strm.str(""); //clear content
+  strm << "Restart: R";
+  io.writeText(strm.str(), hudFrame.x+5,400);
+
+
   // Now set the color for the outline of the hud:
   SDL_SetRenderDrawColor( renderer,
     Gamedata::getInstance().getXmlInt("HudInfo/red"),

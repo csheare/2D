@@ -86,7 +86,6 @@ void Engine::draw() const {
   //viewport.draw(clock.getFps());
   SDL_RenderPresent(renderer);
 }
-
 void Engine::checkForCollisions() {
   auto it = sprites.begin();
   while ( it != sprites.end() ) {
@@ -94,13 +93,12 @@ void Engine::checkForCollisions() {
       std::cout << "REMOVING SPRITE\n" << std::endl;
       Observer* doa = static_cast<Observer*>(*it);
       doa->explode();
-      // player->detach(doa);
+      // player->update(ticks);
       // it = sprites.erase(it);
       // delete doa;
-      //doa->update(clock.getElapsedTicks());
+      doa->update(clock.getElapsedTicks());
     }
-          ++it;
-
+      ++it;
 
   }
 }
@@ -123,7 +121,7 @@ void Engine::update(Uint32 ticks) {
 
 
 
-void Engine::play() {
+bool Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -146,6 +144,10 @@ void Engine::play() {
         if ( keystate[SDL_SCANCODE_P] ) {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
+        }
+        if ( keystate[SDL_SCANCODE_R] ) {
+          clock.unpause();
+          return true;
         }
         if ( keystate[SDL_SCANCODE_F1] ) {
           hud.toggle();
@@ -195,4 +197,5 @@ void Engine::play() {
       }
     }
   }
+  return false;
 }

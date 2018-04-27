@@ -51,7 +51,9 @@ public:
 
   float getTimeSinceLastFrame() const { return timeSinceLastFrame;}
   void setTimeSinceLastFrame(float x){ timeSinceLastFrame =x;}
-
+  void kill(){ alive = false;}
+  void revive(){ alive = true;}
+  bool isAlive(){return alive;}
 
 protected:
   ExplodingSprite* explosion;
@@ -65,6 +67,7 @@ protected:
   float timeSinceLastFrame;
   int worldWidth;
   int worldHeight;
+  bool alive;
 
   virtual void advanceFrame(Uint32 ticks);
   TwoWaySprite& operator=(const TwoWaySprite&);

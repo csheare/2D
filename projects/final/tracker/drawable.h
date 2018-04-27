@@ -49,6 +49,7 @@ public:
   float getVelocityY() const   { return velocity[1]; }
   void  setVelocityY(float vy) { velocity[1] = vy;   }
 
+
   virtual int getWorldWidth() const = 0;
   virtual int getWorldHeight() const = 0;
   virtual void explode() { throw std::string("I don't explode"); }
@@ -57,6 +58,7 @@ private:
   Vector2f position;
   Vector2f velocity;
   float scale;
+
 
 };
 #endif

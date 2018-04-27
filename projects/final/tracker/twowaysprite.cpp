@@ -7,7 +7,6 @@
 TwoWaySprite::~TwoWaySprite() { if ( explosion ) delete explosion; }
 
 
-
 Vector2f TwoWaySprite::makeVelocity(int vx, int vy) const {
 
   float newvx = Gamedata::getInstance().getRandFloat(vx-50,vx+50);;
@@ -37,7 +36,8 @@ MultiSprite(name),
   frameInterval( Gamedata::getInstance().getXmlInt(name+"/frameInterval")),
   timeSinceLastFrame( 0 ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
-  worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  alive(true)
 { }
 
 // TwoWaySprite::TwoWaySprite(const string& n, const Vector2f& pos, const Vector2f& vel,
@@ -60,7 +60,8 @@ TwoWaySprite::TwoWaySprite(const TwoWaySprite& s) :
   frameInterval( s.frameInterval ),
   timeSinceLastFrame( s.timeSinceLastFrame ),
   worldWidth( s.worldWidth ),
-  worldHeight( s.worldHeight )
+  worldHeight( s.worldHeight ),
+  alive(s.alive)
   { }
 
 TwoWaySprite& TwoWaySprite::operator=(const TwoWaySprite& s) {
@@ -74,6 +75,7 @@ TwoWaySprite& TwoWaySprite::operator=(const TwoWaySprite& s) {
   timeSinceLastFrame = ( s.timeSinceLastFrame );
   worldWidth = ( s.worldWidth );
   worldHeight = ( s.worldHeight );
+  alive = (s.alive);
   return *this;
 }
 
@@ -81,21 +83,20 @@ inline namespace{
   constexpr float SCALE_EPSILON = 2e-7;
 }
 
-
-
 void TwoWaySprite::explode() {
   if ( !explosion ) {
-  Sprite
-  sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
-  explosion = new ExplodingSprite(sprite);
-}
+    Sprite sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
+    explosion = new ExplodingSprite(sprite);
+  }
 }
 
 void TwoWaySprite::draw() const {
   if(getScale() < SCALE_EPSILON) return;
-if ( explosion ) explosion->draw();
-else images[currentFrame]->draw(getX(), getY(), getScale());
-
+  if ( explosion ){
+    explosion->draw();
+  }else{
+    images[currentFrame]->draw(getX(), getY(), getScale());
+  }
 }
 void TwoWaySprite::setImagesRight(){
   images = imagesRight;
@@ -106,13 +107,14 @@ void TwoWaySprite::setImagesLeft(){
 
 
 
-
 void TwoWaySprite::update(Uint32 ticks) {
   if ( explosion ) {
   explosion->update(ticks);
   if ( explosion->chunkCount() == 0 ) {
     delete explosion;
     explosion = NULL;
+    this->kill();
+    //this->update(ticks);
   }
   return;
   }
