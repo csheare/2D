@@ -13,7 +13,7 @@ public:
   virtual void update(Uint32 ticks);
   bool goneTooFar() const{ return tooFar;}
   void reset();
-  //Bullet& operator=(const Bullet&);
+  Bullet& operator=(const Bullet&) = delete;
 
 
 private:

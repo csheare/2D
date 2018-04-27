@@ -106,24 +106,19 @@ void Engine::checkForCollisions() {
 }
 
 void Engine::update(Uint32 ticks) {
-
-
-
+  back.update();
+  middle.update();
+  front.update();
 
   for(Drawable* s : sprites){
     static_cast<Observer*>(s)->update(ticks);
   }
 
+  checkForCollisions();
   player->update(ticks);
 
-  back.update();
-  middle.update();
-  front.update();
   viewport.update(); // always update viewport last1
   //i never updated the hud
-
-  checkForCollisions();
-
 }
 
 

@@ -17,6 +17,7 @@ Bullet::Bullet(const Bullet&b):
   maxDistance(b.maxDistance),
   tooFar(b.tooFar)
 {}
+
 void Bullet::update(Uint32 ticks){
   Vector2f pos = getPosition();
   Sprite::update(ticks);
