@@ -21,9 +21,9 @@ public:
   void shoot(const Vector2f& pos, const Vector2f& objVel);//can adjust speed of Bulletss relative to player
 
 
-  unsigned int BulletCount() const { return BulletList.size();}
+  unsigned int BulletCount() const { return bulletList.size();}
   unsigned int freeCount() const { return freeList.size();}
-  bool shooting() const { return !BulletList.empty();}
+  bool shooting() const { return !bulletList.empty();}
   bool collided(const Drawable*) const;
 
 
@@ -31,9 +31,9 @@ private:
 
   std::string name;
   Vector2f myVelocity;
-  std::vector<Image*> BulletImages;
-  std::list<*Bullet> freeList;//used Bullet*
-  std::list<*Bullet> BulletList;
+  std::vector<Image*> bulletImages;
+  std::list<Bullet> freeList;//used Bullet*
+  std::list<Bullet> bulletList;
   CollisionStrategy * strategy;
   int numBullets;
 

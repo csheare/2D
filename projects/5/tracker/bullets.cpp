@@ -16,9 +16,9 @@ Bullets& Bullets::operator=(const Bullets& rhs){
   if(this == &rhs) return *this;
   this->name = rhs.name;
   this->myVelocity = rhs.myVelocity;
-  this->BulletImages = rhs.BulletImages;
+  this->bulletImages = rhs.bulletImages;
   this->freeList = rhs.freeList;
-  this->BulletList = rhs.BulletList;
+  this->bulletList = rhs.bulletList;
   delete this->strategy;
 
 
@@ -46,9 +46,9 @@ Bullets::Bullets(const std::string&name, const Vector2f&pos, const Vector2f&vel)
     Gamedata::getInstance().getXmlInt(name+"/speedX"),
     Gamedata::getInstance().getXmlInt(name+"/speedY")
   ),
-  BulletImages(ImageFactory::getInstance().getImages(name)),
+  bulletImages(ImageFactory::getInstance().getImages(name)),
   freeList(),
-  BulletList(),
+  bulletList(),
   strategy(NULL),
   numBullets(Gamedata::getInstance().getXmlInt("numOfBullets"))
   {
@@ -62,55 +62,51 @@ Bullets::Bullets(const std::string&name, const Vector2f&pos, const Vector2f&vel)
     }
 
     for(int i = 0; i< numBullets;i++){
-      freeList.push_back(new Bullet(name,pos,vel));
+      freeList.emplace_back(Bullet(name,pos,vel));
     }
 }
 
 Bullets::Bullets(const Bullets &b):
   name(b.name),
   myVelocity(b.myVelocity),
-  BulletImages(b.BulletImages),
+  bulletImages(b.bulletImages),
   freeList(b.freeList),
-  BulletList(b.BulletList),
+  bulletList(b.bulletList),
   strategy(b.strategy),
   numBullets(Gamedata::getInstance().getXmlInt("numOfBullets"))
   {}
 
 void Bullets::draw() const{
-  for(const auto& Bullet : BulletList){
-    Bullet->draw();
+  for(const auto& bullet : bulletList){
+    bullet.draw();
   }
 
 }
 void Bullets::update(Uint32 ticks){
-  std::list<Bullet*>::iterator itr = BulletList.begin();
-  while(itr != BulletList.end()){
-    (*itr)->update(ticks);
-    if((*itr)->goneTooFar()){
+  std::list<Bullet>::iterator itr = bulletList.begin();
+  while(itr != bulletList.end()){
+    (*itr).update(ticks);
+    if((*itr).goneTooFar()){
       freeList.push_back(*itr);
-      itr = BulletList.erase(itr);
+      itr = bulletList.erase(itr);
     }else{
         itr++;
     }
   }
 }
 void Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
-  if(freeList.empty()){
-    BulletList.push_back(new Bullet(name, pos,objVel));
-  }else{
-    Bullet * b = freeList.front();
+    Bullet b = freeList.front();
     freeList.pop_front();
-    b->reset();
-    b->setVelocity(objVel);
-    b->setPosition(pos);
-    BulletList.push_back(b);
-  }
+    b.reset();
+    b.setVelocity(objVel);
+    b.setPosition(pos);
+    bulletList.emplace_back(b);
 }
 
 bool Bullets::collided(const Drawable*obj) const{
-  auto it = BulletList.begin();
-  while(it != BulletList.end()){
-    if(strategy->execute(**it,*obj)){
+  auto it = bulletList.begin();
+  while(it != bulletList.end()){
+    if(strategy->execute(*it,*obj)){
       return true;
     }
     ++it;
