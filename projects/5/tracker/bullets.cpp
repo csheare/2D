@@ -49,17 +49,17 @@ Bullets::Bullets(const std::string&name, const Vector2f&pos, const Vector2f&vel)
   bulletImages(ImageFactory::getInstance().getImages(name)),
   freeList(),
   bulletList(),
-  strategy(NULL),
+  strategy( new RectangularCollisionStrategy()),
   numBullets(Gamedata::getInstance().getXmlInt("numOfBullets"))
   {
-    const string thisStrategy = Gamedata::getInstance().getXmlStr("collisionStrategy");
-    if(thisStrategy == "PerPixel"){
-      strategy = new PerPixelCollisionStrategy();
-    }else if(thisStrategy == "Rectangular"){
-      strategy = new RectangularCollisionStrategy();
-    }else if(thisStrategy == "MidPoint"){
-      strategy = new MidPointCollisionStrategy();
-    }
+    // const string thisStrategy = Gamedata::getInstance().getXmlStr("collisionStrategy");
+    // if(thisStrategy == "PerPixel"){
+    //   strategy = new PerPixelCollisionStrategy();
+    // }else if(thisStrategy == "Rectangular"){
+    //   strategy = new RectangularCollisionStrategy();
+    // }else if(thisStrategy == "MidPoint"){
+    //   strategy = new MidPointCollisionStrategy();
+    // }
 
     for(int i = 0; i< numBullets;i++){
       freeList.push_back(Bullet(name,pos,vel));

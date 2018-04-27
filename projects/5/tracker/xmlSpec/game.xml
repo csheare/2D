@@ -241,14 +241,14 @@
   <startLoc x="227" y="140"/>
   <imageWidth>10</imageWidth>
   <imageHeight>10</imageHeight>
-  <speedX>500</speedX>
-  <speedY>500</speedY>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
   <frames>1</frames>
   <distance>200</distance>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
-  <frameSpeed>500</frameSpeed>
-  <minSpeed>300</minSpeed>
+  <frameSpeed>300</frameSpeed>
+  <minSpeed>200</minSpeed>
 </Boulder>
 
 </GameData>
