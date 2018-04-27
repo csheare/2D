@@ -64,7 +64,6 @@ void Player::update(Uint32 ticks){
       setVelocityX(-std::abs(getVelocityX()));
       facing = LEFT;
     }
-    std::cout << "Delay is: " << delay << std::endl;
     if(delay > 0){
       delay--;
       if(getVelocityX() > 0){
@@ -76,29 +75,24 @@ void Player::update(Uint32 ticks){
       }
     }
     else if(getVelocityX() > 0){
-      std::cout << "Regular Right" << std::endl;
       images = imagesRight;
       facing = RIGHT;
       delay =0;
     }
     else if(getVelocityX() < 0){
-      std::cout << "Regular Left" << std::endl;
       images = imagesLeft;
       facing = LEFT;
       delay =0;
     }
     else{
       if(facing == LEFT){
-        std::cout << "Regular Left" << std::endl;
         images = imagesLeft;
       }
       else{
-        std::cout << "Regular Right" << std::endl;
         images = imagesRight;
       }
       delay =0;
     }
-
     stop();
 }
 
@@ -151,24 +145,19 @@ Player& Player::operator=(const Player& s) {
 }
 
 void Player::shoot(){
-  std::cout << "Shooting" << std::endl;
   if(getVelocityX() > 0){
-    std::cout << "ShootingRight" << std::endl;
     images = imagesShootRight;
     delay = 5;
   }
   else if(getVelocityX() < 0){
-    std::cout << "ShootingLeft" << std::endl;
     images = imagesShootLeft;
     delay = 5;
   }
   else if ( facing == RIGHT){
-    std::cout << "ShootingRight" << std::endl;
     images = imagesShootRight;
     delay = 5;
   }
   else if( facing == LEFT){
-    std::cout << "ShootingLeft" << std::endl;
     images = imagesShootLeft;
     delay = 5;
   }
@@ -230,17 +219,3 @@ void Player::down()  {
     setVelocityY( initialVelocity[1] );
   }
 }
-// void explode(){
-//   this.explode();
-//     // if ( !getExplosion() ) {
-//     // Sprite
-//     // sprite(getName(), getPosition(), getVelocity(), images[currentFrame]);
-//     // setExplosion(new ExplodingSprite(sprite));
-// }
-
-// void Player::update(Uint32 ticks) {
-//   if ( !collision ){
-//     TwoWaySprite::update(ticks);
-//   }
-//   stop();
-// }

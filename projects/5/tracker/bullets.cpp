@@ -6,40 +6,6 @@
 #include "collisionStrategy.h"
 
 
-Bullets::~Bullets(){
-  // for(auto b : BulletList){
-  //   delete b;
-  // }
-}
-
-// Bullets& Bullets::operator=(const Bullets& rhs){
-//   if(this == &rhs) return *this;
-//   this->name = rhs.name;
-//   this->myVelocity = rhs.myVelocity;
-//   this->bulletImages = rhs.bulletImages;
-//   this->freeList = rhs.freeList;
-//   this->bulletList = rhs.bulletList;
-//   delete this->strategy;
-//
-//
-//   CollisionStrategy* pp = dynamic_cast<PerPixelCollisionStrategy*>(rhs.strategy);
-//   if(pp){
-//     this->strategy = new PerPixelCollisionStrategy();
-//   }
-//
-//   CollisionStrategy* r = dynamic_cast<RectangularCollisionStrategy*>(rhs.strategy);
-//   if(r){
-//     this->strategy = new RectangularCollisionStrategy();
-//   }
-//
-//   CollisionStrategy* mp = dynamic_cast<MidPointCollisionStrategy*>(rhs.strategy);
-//   if(mp){
-//     this->strategy = new MidPointCollisionStrategy();;
-//   }
-//
-//   return *this;
-// }
-
 Bullets::Bullets(const std::string&name, const Vector2f&pos, const Vector2f&vel):
   name(name),
   myVelocity(
@@ -52,15 +18,6 @@ Bullets::Bullets(const std::string&name, const Vector2f&pos, const Vector2f&vel)
   strategy( new RectangularCollisionStrategy()),
   numBullets(Gamedata::getInstance().getXmlInt("numOfBullets"))
   {
-    // const string thisStrategy = Gamedata::getInstance().getXmlStr("collisionStrategy");
-    // if(thisStrategy == "PerPixel"){
-    //   strategy = new PerPixelCollisionStrategy();
-    // }else if(thisStrategy == "Rectangular"){
-    //   strategy = new RectangularCollisionStrategy();
-    // }else if(thisStrategy == "MidPoint"){
-    //   strategy = new MidPointCollisionStrategy();
-    // }
-
     for(int i = 0; i< numBullets;i++){
       freeList.push_back(Bullet(name,pos,vel));
     }
@@ -95,12 +52,10 @@ void Bullets::update(Uint32 ticks){
   }
 }
 void Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
-  std::cout << "Shoot Bullet" << std::endl;
   if(freeList.empty()){
     Bullet b(name, pos,objVel);
     bulletList.push_back(b);
    }else{
-     std::cout << "Here2" << std::endl;
       Bullet b = freeList.front();
       freeList.pop_front();
       b.reset();
@@ -113,7 +68,6 @@ void Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
 
 bool Bullets::collided(const Drawable*obj) const{
     for(const auto& bullet: bulletList){
-      std::cout<<"Here1";
       if(strategy->execute(bullet,*obj)){
         return true;
       }

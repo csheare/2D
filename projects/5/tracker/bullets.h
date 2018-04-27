@@ -13,8 +13,7 @@ public:
 
   Bullets(const std::string&name, const Vector2f&pos, const Vector2f&vel);
   Bullets(const Bullets &);
-  ~Bullets();
-  Bullets& operator=(const Bullets&);
+  Bullets& operator=(const Bullets&) = delete;
 
   void draw() const;
   void update(Uint32 ticks);
