@@ -51,4 +51,5 @@ private:
   Engine& operator=(const Engine&) =delete;
   void printScales() const;
   void checkForCollisions();
+  void checkForDeadSprites();
 };

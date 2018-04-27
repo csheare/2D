@@ -114,7 +114,7 @@ void TwoWaySprite::update(Uint32 ticks) {
     delete explosion;
     explosion = NULL;
     this->kill();
-    //this->update(ticks);
+    this->update(ticks);
   }
   return;
   }

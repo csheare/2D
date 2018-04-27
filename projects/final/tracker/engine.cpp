@@ -93,13 +93,23 @@ void Engine::checkForCollisions() {
       std::cout << "REMOVING SPRITE\n" << std::endl;
       Observer* doa = static_cast<Observer*>(*it);
       doa->explode();
-      // player->update(ticks);
-      // it = sprites.erase(it);
-      // delete doa;
       doa->update(clock.getElapsedTicks());
     }
-      ++it;
+        ++it;
 
+  }
+}
+
+void Engine::checkForDeadSprites(){
+  auto ptr = sprites.begin();
+  while ( ptr != sprites.end() ) {
+      if((static_cast<TwoWaySprite*>(*ptr)->isAlive()) == false){
+        ptr = sprites.erase(ptr);
+
+
+      }else{
+            ptr++;
+      }
   }
 }
 
@@ -112,7 +122,9 @@ void Engine::update(Uint32 ticks) {
     static_cast<Observer*>(s)->update(ticks);
   }
 
+  checkForDeadSprites();
   checkForCollisions();
+
   player->update(ticks);
 
   viewport.update(); // always update viewport last1

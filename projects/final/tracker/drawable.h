@@ -48,7 +48,7 @@ public:
   virtual void setVelocityX(float vx) { velocity[0] = vx;   }
   float getVelocityY() const   { return velocity[1]; }
   void  setVelocityY(float vy) { velocity[1] = vy;   }
-
+  bool isAlive() { return alive;}
 
   virtual int getWorldWidth() const = 0;
   virtual int getWorldHeight() const = 0;
@@ -58,6 +58,7 @@ private:
   Vector2f position;
   Vector2f velocity;
   float scale;
+  bool alive;
 
 
 };
