@@ -95,21 +95,26 @@ void Bullets::update(Uint32 ticks){
   }
 }
 void Bullets::shoot(const Vector2f& pos, const Vector2f& objVel){
-    Bullet b = freeList.front();
-    freeList.pop_front();
-    b.reset();
-    b.setVelocity(objVel);
-    b.setPosition(pos);
-    bulletList.emplace_back(b);
+  std::cout << "Shoot Bullet" << std::endl;
+  if(freeList.empty()){
+   Bullet b(name, pos,objVel);
+    bulletList.push_back(b);
+   }else{
+      Bullet b = freeList.front();
+      freeList.pop_front();
+      b.reset();
+      b.setVelocity(objVel);
+      b.setPosition(pos);
+      bulletList.emplace_back(b);
+  }
 }
 
+
 bool Bullets::collided(const Drawable*obj) const{
-  auto it = bulletList.begin();
-  while(it != bulletList.end()){
-    if(strategy->execute(*it,*obj)){
-      return true;
+    for(const auto& Bullet: bulletList){
+      if(strategy->execute(Bullet,*obj)){
+        return true;
+      }
     }
-    ++it;
+    return false;
   }
-  return false;
-}

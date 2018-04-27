@@ -34,6 +34,7 @@ private:
   std::vector<Image*> bulletImages;
   std::list<Bullet> freeList;//used Bullet*
   std::list<Bullet> bulletList;
+  //std::list<Bullet*> allBullets;
   CollisionStrategy * strategy;
   int numBullets;
 

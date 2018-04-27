@@ -24,7 +24,7 @@
 
 <!--This can be "PerPixel", "Recgatngular", or "MidPoint" -->
 
-<collisionStrategy>"PerPixel"</collisionStrategy>
+<collisionStrategy>"Rectangular"</collisionStrategy>
 
 <HudPlacement>
   <loc>
