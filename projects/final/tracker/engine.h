@@ -2,15 +2,15 @@
 #include <SDL.h>
 #include "world.h"
 #include "viewport.h"
-#include "clock.h"
 #include "collisionStrategy.h"
 #include "subject.h"
 #include "hud.h"
 #include "poolhud.h"
-#include "gamedata.h"
 #include "frameGenerator.h"
 #include "player.h"
 #include "observer.h"
+#include "menuEngine.h"
+#include "ioMod.h"
 
 
 class Engine {
@@ -23,11 +23,13 @@ public:
 
 private:
   const RenderContext* rc;
+
   const IoMod& io;
   Hud& hud;
   Clock& clock;
 
   SDL_Renderer * const renderer;
+  MenuEngine menuEngine;
   World front;
   World middle;
   World back;

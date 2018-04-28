@@ -9,7 +9,6 @@
 #include <time.h>
 #include <unistd.h>
 
-#include "sprite.h"
 #include "multisprite.h"
 #include "twowaysprite.h"
 #include "observer.h"
@@ -34,6 +33,7 @@ Engine::Engine() :
   hud(Hud::getInstance()),
   clock( Clock::getInstance() ),
   renderer( rc->getRenderer() ),
+  menuEngine(),
   front("front", Gamedata::getInstance().getXmlInt("front/factor") ),
   middle("middle", Gamedata::getInstance().getXmlInt("middle/factor") ),
   back("back", Gamedata::getInstance().getXmlInt("back/factor") ),
@@ -75,6 +75,15 @@ void Engine::draw() const {
   front.draw();
   hud.draw();
   poolHud.draw();
+
+   std::stringstream strm;
+    if ( sprites.size() == 0 ) {
+      io.writeText("You Win! Press R to Restart the game", 250, 200);
+      clock.pause();
+    }
+    io.writeText("Press 'm' for menu", 30, 60);
+
+
 
   player->draw();
   for(Drawable* sprite : sprites){
@@ -128,7 +137,6 @@ void Engine::update(Uint32 ticks) {
   player->update(ticks);
 
   viewport.update(); // always update viewport last1
-  //i never updated the hud
 }
 
 
@@ -150,8 +158,10 @@ bool Engine::play() {
           done = true;
           break;
         }
-        if ( keystate[SDL_SCANCODE_M] ) {
-          currentStrategy = (1 + currentStrategy) % strategies.size();
+        if ( keystate[SDL_SCANCODE_M] || keystate[SDL_SCANCODE_O] ) {
+          clock.pause();
+          menuEngine.play();
+          clock.unpause();
         }
         if ( keystate[SDL_SCANCODE_P] ) {
           if ( clock.isPaused() ) clock.unpause();

@@ -22,6 +22,8 @@ OBJS = \
 	collisionStrategy.o\
 	bullets.o\
 	bullet.o\
+	menu.o\
+	menuEngine.o\
 	poolhud.o\
 	observer.o\
 	chunk.o\

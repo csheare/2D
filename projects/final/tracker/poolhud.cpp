@@ -1,6 +1,7 @@
 #include <sstream>
 #include "poolhud.h"
 #include "gamedata.h"
+#include "ioMod.h"
 
 PoolHud::PoolHud(const Player& p):
   player(p),

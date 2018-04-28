@@ -3,7 +3,9 @@
 
 #include "gamedata.h"
 #include "player.h"
-#include "ioMod.h"
+
+
+class IoMod;
 
 class PoolHud {
 
