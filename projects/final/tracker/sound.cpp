@@ -35,18 +35,18 @@ SDLSound::SDLSound() :
   music = Mix_LoadMUS("sound/OF.wav");
   // Need to install midi to play the following:
   // music = Mix_LoadMUS("sound/ballad2.mid");
-  if (!music) throw string("Couldn't load 100Years.mp3")+Mix_GetError();
+  if (!music) throw string("Couldn't load OF.mp3")+Mix_GetError();
 
   startMusic();
 
-  sounds.push_back( Mix_LoadWAV("sound/Boom.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/Gun.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/Thump.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/phaser.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/Putt1.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/cannon.wav") );
-  sounds.push_back( Mix_LoadWAV("sound/Larc.wav") );
+  sounds.push_back( Mix_LoadWAV("sound/Boom.wav") );//0
+  sounds.push_back( Mix_LoadWAV("sound/Gun.wav") );//1
+  sounds.push_back( Mix_LoadWAV("sound/Thump.wav") );//2
+  sounds.push_back( Mix_LoadWAV("sound/phaser.wav") );//3
+  sounds.push_back( Mix_LoadWAV("sound/Putt1.wav") );//4
+  sounds.push_back( Mix_LoadWAV("sound/explosion.wav") );//5
+  sounds.push_back( Mix_LoadWAV("sound/cannon.wav") );//6
+  sounds.push_back( Mix_LoadWAV("sound/Larc.wav") );//7
   for (unsigned int i = 0; i < sounds.size(); ++i) channels.push_back(i);
   std::cout << "Music and Sound is loaded" << std::endl;
 }

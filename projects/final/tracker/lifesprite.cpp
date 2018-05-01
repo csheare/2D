@@ -6,6 +6,10 @@
 #include "collisionStrategy.h"
 #include "renderContext.h"
 
+LifeSprite::~LifeSprite( ) {
+      delete strategy;
+}
+
 Vector2f LifeSprite::makeVelocity(int vx, int vy) const {
 
   float newvx = Gamedata::getInstance().getRandFloat(vx-50,vx+50);;
@@ -21,7 +25,10 @@ LifeSprite::LifeSprite(const string& n, const Vector2f& pos, const Vector2f& vel
   Drawable(n, pos, vel),
   image( img ),
   worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
-  worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height")),
+  active(false),
+  strategy(new RectangularCollisionStrategy()),
+  delay(0)
 { }
 
 LifeSprite::LifeSprite(const std::string& name) :

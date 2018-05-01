@@ -14,7 +14,7 @@ public:
   Bullets(const std::string&name, const Vector2f&pos, const Vector2f&vel);
   Bullets(const Bullets &);
   Bullets& operator=(const Bullets&) = delete;
-
+  ~Bullets(){};
   void draw() const;
   void update(Uint32 ticks);
   void shoot(const Vector2f& pos, const Vector2f& objVel);//can adjust speed of Bulletss relative to player

@@ -13,15 +13,14 @@
 #include "twowaysprite.h"
 #include "observer.h"
 
-
-
 #include "engine.h"
 
 Engine::~Engine() {
-  delete player;
+
   for ( Drawable* sprite : sprites ) {
     delete sprite;
   }
+  delete player;
   delete healthBar;
   delete lifeSprite;
   std::cout << "Terminating program" << std::endl;
@@ -64,6 +63,12 @@ void Engine::draw() const {
   hud.draw();
   poolHud.draw();
 
+  std::stringstream strm;
+   if ( sprites.size() == 0 ) {
+     io.writeText("You Win! Press R to Restart the game", 250, 200);
+     clock.pause();
+   }
+
   player->draw();
   if(!player->isAlive()){
     io.writeText("You Lose! Press R to Restart the game", 250, 200);
@@ -81,17 +86,13 @@ void Engine::draw() const {
     static_cast<Observer*>(sprite)->draw();
   }
 
-  std::stringstream strm;
-   if ( sprites.size() == 0 ) {
-     io.writeText("You Win! Press R to Restart the game", 250, 200);
-     clock.pause();
-   }
 
   healthBar->draw();
 
 
   if ( healthBar->getCurrentLength() == 0 ) {
     player->explode();
+    //sound[0];
     player->kill();
   }
 
@@ -104,6 +105,7 @@ void Engine::checkForCollisions() {
       //std::cout << "REMOVING SPRITE\n" << std::endl;
       Observer* doa = static_cast<Observer*>(*it);
       doa->explode();
+      //sound[0];
       doa->update(clock.getElapsedTicks());
     }
         ++it;
@@ -158,6 +160,7 @@ void Engine::update(Uint32 ticks) {
 
   checkForDeadSprites();
   checkForCollisions();
+  healthBar->update(ticks);
   player->update(ticks);
 
   if(lifeSprite->isActive()){
@@ -168,7 +171,7 @@ void Engine::update(Uint32 ticks) {
       lifeSprite->toggle();
     }
   }
-  healthBar->update(ticks);
+
 
   viewport.update(); // always update viewport last1
 }
@@ -204,6 +207,7 @@ bool Engine::play() {
               numOfSprites = menuEngine.getNumSprites();
               killAllSprites();
               loadSprites();
+              checkForDeadSprites();
           }if(menuEngine.getDifficulty() != (-1)){
             std::cout << menuEngine.getDifficulty() << std::endl;
             if(menuEngine.getDifficulty() == 1){
@@ -211,17 +215,20 @@ bool Engine::play() {
               numOfSprites = 1;
               killAllSprites();
               loadSprites();
+              checkForDeadSprites();
             }
             if(menuEngine.getDifficulty() == 2){
               healthBar->reset();
               numOfSprites = 10;
               killAllSprites();
               loadSprites();
+              checkForDeadSprites();
             }if(menuEngine.getDifficulty() == 3){//must be 3
               healthBar->reset();
               numOfSprites = 100;
               killAllSprites();
               loadSprites();
+              checkForDeadSprites();
             }
             menuEngine.setDifficulty(-1);
           }if(menuEngine.godModeOn()){

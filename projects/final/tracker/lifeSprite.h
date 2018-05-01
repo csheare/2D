@@ -11,7 +11,7 @@ public:
   LifeSprite(const std::string&, const Vector2f& pos, const Vector2f& vel,
          const Image*);
   LifeSprite(const LifeSprite&);
-  virtual ~LifeSprite() { }
+  virtual ~LifeSprite();
   LifeSprite& operator=(const LifeSprite&);
 
   virtual void draw() const;
