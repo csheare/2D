@@ -92,7 +92,6 @@ void Engine::draw() const {
 
   if ( healthBar->getCurrentLength() == 0 ) {
     player->explode();
-    //sound[0];
     player->kill();
   }
 
@@ -105,7 +104,7 @@ void Engine::checkForCollisions() {
       //std::cout << "REMOVING SPRITE\n" << std::endl;
       Observer* doa = static_cast<Observer*>(*it);
       doa->explode();
-      //sound[0];
+      sound[5];
       doa->update(clock.getElapsedTicks());
     }
         ++it;

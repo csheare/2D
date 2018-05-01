@@ -24,8 +24,8 @@ public:
   void startMusic();
   void stopMusic();      // stop all sounds
   void toggleMusic();    // toggle music on/off
-  void operator[](int);  // play the indexed sound
-  
+  void operator[](int) ;  // play the indexed sound
+
 private:
   int volume;
   int currentSound;
