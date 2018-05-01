@@ -11,6 +11,9 @@
 #include "observer.h"
 #include "menuEngine.h"
 #include "ioMod.h"
+#include "healthBar.h"
+#include "lifeSprite.h"
+#include "sound.h"
 
 
 class Engine {
@@ -34,15 +37,18 @@ private:
   World middle;
   World back;
   Viewport& viewport;
+  HealthBar* healthBar;
 
   std::vector<Drawable*> sprites;
 
   int numOfSprites;
   Subject* player;
+  LifeSprite * lifeSprite;
   PoolHud poolHud;
   std::vector<CollisionStrategy*> strategies;
   int currentStrategy;
   bool collision;
+  SDLSound sound;
 
   bool makeVideo;
 
@@ -54,4 +60,6 @@ private:
   void printScales() const;
   void checkForCollisions();
   void checkForDeadSprites();
+  void killAllSprites();
+  void loadSprites();
 };

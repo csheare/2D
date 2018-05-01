@@ -22,12 +22,3 @@ public:
   virtual void draw() const;
   float distance(float, float, float, float) const;
 };
-
-class PerPixelCollisionStrategy : public CollisionStrategy {
-public:
-  PerPixelCollisionStrategy() {}
-  virtual bool execute(const Drawable&, const Drawable&) const;
-  virtual void draw() const;
-private:
-  bool isVisible(Uint32, SDL_Surface*) const;
-};

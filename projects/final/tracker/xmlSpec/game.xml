@@ -11,8 +11,9 @@
 <maxFrames>300</maxFrames>
 <username>csheare</username>
 
-<numOfSprites>7</numOfSprites>
+<numOfSprites>10</numOfSprites>
 <numOfBullets>10</numOfBullets>
+<numHealthSprites>10</numHealthSprites>
 
 <HudInfo>
   <Line1>To Move: WASD</Line1>
@@ -29,15 +30,15 @@
 <HudPlacement>
   <loc>
     <x>50</x>
-    <y>175</y>
+    <y>125</y>
   </loc>
-  <width>150</width>
-  <height>250</height>
+  <width>205</width>
+  <height>300</height>
 </HudPlacement>
 
 <PoolHudPlacement>
   <loc>
-    <x>400</x>
+    <x>50</x>
     <y>10</y>
   </loc>
   <width>150</width>
@@ -51,7 +52,7 @@
 
 <world>
   <width>2000</width>
-  <height>600</height>
+  <height>598</height>
 </world>
 
 <back>
@@ -73,8 +74,8 @@
 
 
 <font name="font">
-  <file>fonts/arial.ttf</file>
-  <size>15</size>
+  <file>fonts/Quicksand-Bold.otf</file>
+  <size>20</size>
   <red>4</red>
   <green>8</green>
   <blue>30</blue>
@@ -142,8 +143,8 @@
   <frameInterval>500</frameInterval>
   <minFrameDelay>10</minFrameDelay>
   <frameSpeed>500</frameSpeed>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
   <transparency>false</transparency>
   <bulletName>Boulder</bulletName>
 </Eagle>
@@ -161,8 +162,8 @@
   <frameInterval>500</frameInterval>
   <minFrameDelay>20</minFrameDelay>
   <frameSpeed>50</frameSpeed>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
   <transparency>false</transparency>
   <bulletName>Boulder</bulletName>
 </EagleR>
@@ -180,8 +181,8 @@
   <frameInterval>500</frameInterval>
   <minFrameDelay>20</minFrameDelay>
   <frameSpeed>500</frameSpeed>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
   <transparency>false</transparency>
   <bulletName>Boulder</bulletName>
 </EagleL>
@@ -228,44 +229,72 @@
   <file>assets/windspinner5.png</file>
   <startLoc x="50" y="140"/>
   <frames>4</frames>
-  <imageWidth>32</imageWidth>
-  <imageHeight>32</imageHeight>
+  <imageWidth>47</imageWidth>
+  <imageHeight>23</imageHeight>
   <frameInterval>3</frameInterval>
   <speedX>300</speedX>
   <speedY>300</speedY>
   <transparency>false</transparency>
 </WindSpinner>
 
+<Heart>
+  <file>assets/heart.png</file>
+  <startLoc x="300" y="100"/>
+  <imageWidth>40</imageWidth>
+  <imageHeight>20</imageHeight>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+</Heart>
+
 <Boulder>
   <file>assets/boulder.png</file>
   <startLoc x="227" y="140"/>
   <imageWidth>10</imageWidth>
   <imageHeight>10</imageHeight>
-  <speedX>300</speedX>
-  <speedY>300</speedY>
+  <speedX>400</speedX>
+  <speedY>0</speedY>
   <frames>1</frames>
   <distance>200</distance>
   <safeDistance>75</safeDistance>
   <transparency>false</transparency>
-  <frameSpeed>300</frameSpeed>
-  <minSpeed>300</minSpeed>
+  <frameSpeed>0</frameSpeed>
+  <minSpeed>500</minSpeed>
 </Boulder>
 
-<menu>
+<menu0>
+  <width>854</width>
+  <height>480</height>
+  <noOfOptions>4</noOfOptions>
+  <loc x="0" y="0"/>
+  <msg x="30" y="60"/>
+  <optionLoc x="300" y="60" />
+  <color r="255" g="255" b="255" a="255"/>
+  <backColor r="122" g="173" b="251" a="255"/>
+  <option0>Return to Game</option0>
+  <option1>No. of Sprites</option1>
+  <option2>Set Difficulty</option2>
+  <option3>Set God Mode On!</option3>
+  <spaces>50</spaces>
+</menu0>
+
+<menu1>
   <width>854</width>
   <height>480</height>
   <noOfOptions>3</noOfOptions>
   <loc x="0" y="0"/>
-  <optionLoc x="400" y="100" />
-  <color r="193" g="205" b="205" a="255"/>
-  <option0>Go to Game</option0>
-  <option1>No. of Stars</option1>
-  <option2>Help</option2>
+  <msg x="30" y="60"/>
+  <optionLoc x="300" y="70" />
+  <color r="255" g="255" b="255" a="255"/>
+  <backColor r="122" g="173" b="251" a="255"/>
+  <option0>Easy</option0>
+  <option1>Medium</option1>
+  <option2>Hard</option2>
   <spaces>70</spaces>
-</menu>
+</menu1>
 
 <clickOn>
-  <file>assets/clickon.png</file>
+  <file>assets/sunshine.png</file>
   <startLoc x="340" y="170"/>
   <speedX>0</speedX>
   <speedY>0</speedY>
@@ -273,11 +302,34 @@
 </clickOn>
 
 <clickOff>
-  <file>assets/clickoff.png</file>
+  <file>assets/sunshineOff.png</file>
   <startLoc x="340" y="170"/>
   <speedX>0</speedX>
   <speedY>0</speedY>
   <transparency>true</transparency>
 </clickOff>
+
+<HealthBar>
+  <startLoc x="225" y="30"/>
+  <!-- number of times the bar is decremented -->
+  <increment>20</increment>
+  <interval>1000</interval>
+  <width>200</width>
+  <height>15</height>
+  <speedX>0</speedX>
+  <speedY>0</speedY>
+  <backColor>
+    <r>255</r>
+    <g>255</g>
+    <b>255</b>
+    <a>127</a>
+  </backColor>
+  <barColor>
+    <r>255</r>
+    <g>0</g>
+    <b>0</b>
+    <a>255</a>
+  </barColor>
+</HealthBar>
 
 </GameData>

@@ -18,29 +18,35 @@ void Hud::draw()const{
 
   std::stringstream strm;
   strm << "Toggle with F1!";
-  io.writeText(strm.str(), hudFrame.x+5,200);
+  io.writeText(strm.str(), hudFrame.x+5,150);
 
   strm.clear();//clear error flags
   strm.str(""); //clear content
 
   strm << "Explode with E!";
-  io.writeText(strm.str(), hudFrame.x+5,250);
+  io.writeText(strm.str(), hudFrame.x+5,200);
 
   strm.clear();//clear error flags
   strm.str(""); //clear content
 
   strm << "Shoot with I!";
-  io.writeText(strm.str(), hudFrame.x+5,300);
+  io.writeText(strm.str(), hudFrame.x+5,250);
 
   strm.clear();//clear error flags
   strm.str(""); //clear content
   strm << "Move Player: ASWD";
-  io.writeText(strm.str(), hudFrame.x+5,350);
+  io.writeText(strm.str(), hudFrame.x+5,300);
 
   strm.clear();//clear error flags
   strm.str(""); //clear content
   strm << "Restart: R";
+  io.writeText(strm.str(), hudFrame.x+5,350);
+
+  strm.clear();//clear error flags
+  strm.str(""); //clear content
+  strm << "Menu: M";
   io.writeText(strm.str(), hudFrame.x+5,400);
+
 
 
   // Now set the color for the outline of the hud:

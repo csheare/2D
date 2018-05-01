@@ -41,9 +41,9 @@ void Subject::checkForDead(){
   auto ptr = observers.begin();
   while ( ptr != observers.end() ) {
       if(((*ptr)->isAlive()) == false){
-        Observer * doa = *ptr;
+        //Observer * doa = *ptr;
         ptr = observers.erase(ptr);
-        delete doa;
+        //delete doa;
       }else{
             ptr++;
       }

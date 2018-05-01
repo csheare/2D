@@ -26,7 +26,6 @@ public:
   void  setScale(float s) { scale = s; }
   virtual int getScaledWidth() const = 0;
   virtual int getScaledHeight() const = 0;
-  virtual const SDL_Surface* getSurface() const = 0;
 
   const std::string& getName() const { return name; }
   void setName(const std::string& n) { name = n;    }
@@ -50,8 +49,7 @@ public:
   void  setVelocityY(float vy) { velocity[1] = vy;   }
   bool isAlive() { return alive;}
 
-  virtual int getWorldWidth() const = 0;
-  virtual int getWorldHeight() const = 0;
+
   virtual void explode() { throw std::string("I don't explode"); }
 private:
   std::string name;
