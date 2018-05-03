@@ -4,22 +4,28 @@ Course: CPSC 4160
 
 Clemson Email Address: csheare
 
-Project no:5
+Project no:6
 
-Project due date: April 20, 2018
+Project due date: May 2, 2018
 
 
 Project Conclusion:
-The eventual goal of this game will be to out survive the other birds. A high score will be kept track of.
-I will incorporate a health bar, which will go up when bugs are consumed, but decrease as time goes on
-without eating bugs. Additionally, there will be other "dark" eagles that try to eat the bugs and will attack
-the player within a certain range. These Eagles will also have health bars, but the player will not be able to
-see them. Some of the dark eagles may be "stronger" than others too, larger health bars. Again, the goal of the
-game is to out survive the other birds, aka the dark eagles and the other bird that don't attack but do try to
-eat bugs.
+The goal of this game is to kill all the other birds before your health runs out. You move with AWSD, you shoot with I, you can toggle the menu with M, and restart with R.
+To regain health an occasional red heart will appear. To win easily, toggle the menu and select God Mode. This will give you infinite health. Additionally, you can make the game harder by
+changing the level or increasing the number of sprites manually.
+
+Pizzaz:
+To add Pizzaz, I made a menu. The menu has four options when you toggle it: 1)Go Back to Game, 2)Add Sprites, 3)Set Difficulty, 4)Toggle God Mode. The 3) option loads another menu to allow a player to select their game difficulty. I changed Dr.Malloy's light bulb to sunshine too :).
+
 
 Sources:
 Zion Background: https://commons.wikimedia.org/wiki/File:Franz_A._Bischoff_-_Zion_Park.jpg
-Eagle: https://dribbble.com/shots/1451359-Eagle-Sprite-Sheet
+Eagle: https://dribbble.com/shots/1451359-Eagle-Sprite-Sheet, had to still make many edits
 Small bird: I made the edits for the sprite sheet, but used https://cdn.dribbble.com/users/375867/screenshots/1452976/green-bird-sprite-sheet-animation-game-assets-dribbble.jpg, https://dribbble.com/
 WindSpinner: I made this
+Boulder: I made this
+Heart: I made this
+Sun: https://www.msdwt.k12.in.us/wp-content/uploads/2018/03/Sunshine.gif, https://www.google.com/
+Music: http://www.playlist-to-mp3.com/download/?id=GXFSK0ogeg4&title=Carl-Orff-O-Fortuna-Carmina-Burana, http://www.playlist-to-mp3.com/Carl-Orff-O-Fortuna-Carmina-Burana-id-342804
+
+And, of course, credit to Dr.Brian Malloy at Clemson University, my teacher for this course.
